@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Helvetica, Arial, Sans-Serif, sans-serif;
+  background: white;
+  width: 100%;
+  height: 100%;
+}
+
+input.form-control {
+  border: none;
+  border-bottom: 1px solid lightgray;
+  border-radius: 0;
+  padding: .375rem 0;
+}
+
+input.form-control:focus {
+  box-shadow: none;
+  border-bottom: 1px solid gray;
+  transition: border-bottom ease-in-out .5s;
+}
+
+input.form-control:read-only {
+  background: none;
+  border: none;
+  margin-bottom: 1px;
+}
+
+#alertbox {
+  position: absolute;
+  top: 1em;
+  left: 50%;
+  transition: all ease-in-out .15s;
+}
+
+#alertbox.up {
+  transform: translateY(-50%);
+  opacity: 0;
+}
+
+#alertbox.down {
+  transform: translateY(100%);
+  opacity: 1;
+}
+
+.alert-box-inner {
+  left: -50%;
+  position: relative;
+}

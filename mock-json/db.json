@@ -1,0 +1,39 @@
+{
+  "profile": {
+    "name": "Marco",
+    "surname": "Spagnulo",
+    "address": "Via Torquato Tasso, Lecce",
+    "mobile": "3314464559",
+    "email": "marco.spagnulo@gmail.com",
+    "password": "logispin"
+  },
+  "contacts": [
+    {
+      "address": "Via Aldo Moro, Milano",
+      "email": "mario.rossi@email.it",
+      "id": 1,
+      "mobile": "33912345677",
+      "name": "Mario",
+      "password": "logispin",
+      "surname": "Rossi"
+    },
+    {
+      "address": "Via Bari 17, Lecce",
+      "email": "fbianchi@libero.it",
+      "id": 2,
+      "mobile": "3404756987",
+      "name": "Francesca",
+      "password": "logispin",
+      "surname": "Bianchi"
+    },
+    {
+      "address": "Via Collodi, Taranto",
+      "email": "chiarella@yahoo.it",
+      "id": 3,
+      "mobile": "32865789093",
+      "name": "Chiara",
+      "password": "logispin",
+      "surname": "De Filippo"
+    }
+  ]
+}

@@ -28,7 +28,7 @@ class Contacts extends React.Component {
 
     componentDidMount() {
         this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
-        this.props.getContactsAction();
+        this.props.getContactsAction(this.props.profile.id);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -102,14 +102,14 @@ class Contacts extends React.Component {
      * Submit the form to the contact service
      */
     handleSubmitContact() {
-        this.props.submitContactAction(this.props.contact);
+        this.props.submitContactAction({ userId: this.props.profile.id, contact: this.props.contact });
     }
 
     /**
      * Call the action for deleting a contact
      */
     handleDeleteContact() {
-        this.props.deleteContactAction(this.props.contact.id);
+        this.props.deleteContactAction({ userId: this.props.profile.id, contactId: this.props.contact.id });
     }
 
     /**
@@ -199,7 +199,8 @@ class Contacts extends React.Component {
 function mapStateToProps(state) {
     return {
         contacts: state.contacts.contacts,
-        contact: state.contacts.contact
+        contact: state.contacts.contact,
+        profile: state.profile.profile
     };
 };
 

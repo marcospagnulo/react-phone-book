@@ -1,16 +1,20 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as profileActions from '../store/actions/profileActions'
 import FormField from '../components/formField';
+import * as profileActions from '../store/actions/profileActions'
+import * as types from '../store/actionTypes';
 
-// Home page component. This serves as the welcome page with link to the library
 class Profile extends React.Component {
 
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
     }
 
     handleChange(event) {
@@ -30,11 +34,23 @@ class Profile extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         this.props.submitProfileAction(this.props.profile);
-
     }
 
-    componentDidMount() {
-        this.props.getProfileAction(null);
+    /**
+     * Function called by the reducer as a callback of some actions
+     * 
+     * @param {*} actionType 
+     */
+    actionDispatched(actionType) {
+
+        switch (actionType) {
+            case types.SUBMIT_PROFILE_SUCCESS:
+                this.props.showMessageBox("Profile submit succuessfully", "success");
+                return;
+            case types.SUBMIT_PROFILE_ERROR:
+                this.props.showMessageBox("Unable to submit profile due to an error", "danger");
+                return;
+        }
     }
 
     render() {
@@ -106,14 +122,14 @@ class Profile extends React.Component {
 
 // Subscribe component to redux store and merge the state into component's props
 function mapStateToProps(state) {
-    return { profile: state.profile };
+    return { profile: state.profile.profile };
 };
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
+        registerContactComponent: profileActions.registerContactComponent,
         submitProfileAction: profileActions.submitProfileAction,
-        updateProfileAction: profileActions.updateProfileAction,
-        getProfileAction: profileActions.getProfileAction
+        updateProfileAction: profileActions.updateProfileAction
     }, dispatch);
 }
 

@@ -2,6 +2,11 @@ import { takeLatest } from 'redux-saga/effects';
 import * as saga from './serviceSaga';
 import * as types from '../store/actionTypes';
 
+// LOGIN watcher
+export function* watchLogin() {
+    yield takeLatest(types.LOGIN, saga.loginSaga);
+}
+
 // GET PROFILE watcher
 export function* watchGetProfile() {
     yield takeLatest(types.GET_PROFILE, saga.getProfileSaga);

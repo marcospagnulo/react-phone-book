@@ -15,7 +15,7 @@ export function* submitContactSaga({ payload }) {
     try {
         const response = yield call(service.subimtContact, payload);
         yield put({ type: types.SUBMIT_CONTACT_SUCCESS, payload: response.data });
-        yield put({ type: types.GET_CONTACTS, payload: {} })
+        yield put({ type: types.GET_CONTACTS, payload: payload.userId })
     } catch (error) {
         yield put({ type: types.SUBMIT_CONTACT_ERROR, error });
     }
@@ -23,9 +23,9 @@ export function* submitContactSaga({ payload }) {
 
 export function* deleteContactSaga({ payload }) {
     try {
-        const response = yield call(service.deleteContact, payload);
+        const response = yield call(service.deleteContact, payload.contactId);
         yield put({ type: types.DELETE_CONTACT_SUCCESS, payload: response.data });
-        yield put({ type: types.GET_CONTACTS, payload: {} })
+        yield put({ type: types.GET_CONTACTS, payload: payload.userId })
     } catch (error) {
         yield put({ type: types.DELETE_CONTACT_ERROR, error });
     }
@@ -37,6 +37,19 @@ export function* getProfileSaga({ payload }) {
         yield put({ type: types.GET_PROFILE_SUCCESS, payload: response.data });
     } catch (error) {
         yield put({ type: types.GET_PROFILE_ERROR, error });
+    }
+}
+
+export function* loginSaga({ payload }) {
+    try {
+        const response = yield call(service.login, payload);
+        if (response.data.length > 0) {
+            yield put({ type: types.LOGIN_SUCCESS, payload: response.data[0] });
+        } else {
+            yield put({ type: types.LOGIN_ERROR, payload: null });
+        }
+    } catch (error) {
+        yield put({ type: types.LOGIN_ERROR, error });
     }
 }
 

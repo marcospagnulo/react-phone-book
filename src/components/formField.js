@@ -7,7 +7,7 @@ export default class FormField extends React.Component {
             <div className="pb-3">
                 <strong><i className={"pr-2 " + this.props.iconClass}></i>{this.props.fieldLabel}</strong>
                 <input
-                    type="text"
+                    type={this.props.fieldType ? this.props.fieldType : "text"}
                     name={this.props.fieldName}
                     className="form-control"
                     readOnly={!this.props.edit}

@@ -24,7 +24,6 @@ class Messages extends React.Component {
 
     componentDidMount() {
         this.props.registerMessagesComponent(this); // Registering component to the reducer for listening action callbacks
-        this.props.getMessagesAction(this.props.profile.id);
     }
 
     componentWillReceiveProps(nextProps) {

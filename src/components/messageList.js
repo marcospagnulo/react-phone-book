@@ -10,8 +10,8 @@ export default class MessageList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.messages !== nextProps.messages) {
-            let messages = nextProps.messages.slice();
-            messages.forEach((message, index) => { messages.open = false; });
+            let messages = [...nextProps.messages];
+            messages.forEach((m, index) => { m.open = false; });
             this.setState({ messages: messages });
         }
     }
@@ -28,7 +28,7 @@ export default class MessageList extends React.Component {
             // Toggle only on selected item
             m.open = m.id === message.id ? !m.open : false;
         });
-        this.setState({ accordion: messages });
+        this.setState({ messages: messages });
     }
 
     render() {

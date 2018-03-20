@@ -36,12 +36,12 @@ export const getMessages = (userId) => {
     return axios.get(SERVICE_URL + "/messages?userId=" + userId);
 }
 
-export const subimtMessage = (payload) => {
-    if (payload.contact.id) {
-        return axios.put(SERVICE_URL + "/messages/" + payload.contact.id, payload.contact);
-    } else {
-        return axios.post(SERVICE_URL + "/messages", payload.contact);
-    }
+export const sendMessage = (payload) => {
+    return axios.post(SERVICE_URL + "/messages", payload);
+}
+
+export const readMessage = (payload) => {
+    return axios.put(SERVICE_URL + "/messages/" + payload.id, payload);
 }
 
 export const deleteMessage = (id) => {

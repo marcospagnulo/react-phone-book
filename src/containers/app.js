@@ -23,8 +23,19 @@ class App extends Component {
                 show: false,
                 text: "",
                 level: ""
-            }
+            },
+            unreadMessage: 0
         };
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.messages) {
+            let unreadMessage = 0;
+            nextProps.messages.forEach((m, index) => {
+                unreadMessage = !m.read ? unreadMessage + 1 : unreadMessage;
+            })
+            this.setState({ unreadMessage: unreadMessage });
+        }
     }
 
     logout() {
@@ -69,8 +80,8 @@ class App extends Component {
                         <Route path="/login" component={Login} />
                         <PrivateRoute path="/home" authenticated={this.props.profile !== null} component={Home} exact={true} />
                         <PrivateRoute path="/profile" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Profile} />
-                        <PrivateRoute path="/messages" authenticated={this.props.profile !== null} component={Messages} exact={true} />
-                        <PrivateRoute path="/messages/:contactId" authenticated={this.props.profile !== null} component={Messages} exact={true} />
+                        <PrivateRoute path="/messages" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
+                        <PrivateRoute path="/messages/:contactId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
                         <PrivateRoute path="/contacts" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />
                         <PrivateRoute path="/contacts/:contactId" authenticated={this.props.profile !== null} component={Contacts} />} />
                     </Switch>
@@ -78,7 +89,7 @@ class App extends Component {
 
                 {
                     /* Bottom bar */
-                    this.props.profile !== null ? <BottomBar /> : null
+                    this.props.profile !== null ? <BottomBar unread={this.state.unreadMessage} /> : null
                 }
 
                 { /* Alert box*/}
@@ -92,7 +103,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-    return { profile: state.profile.profile };
+    return {
+        profile: state.profile.profile,
+        messages: state.messages.messages
+    };
 };
 
 function matchDispatchToProps(dispatch) {

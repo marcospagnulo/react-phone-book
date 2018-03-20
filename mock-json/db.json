@@ -1,5 +1,6 @@
 {
-  "profiles": [{
+  "profiles": [
+    {
       "id": 1,
       "name": "Marco",
       "surname": "Spagnulo",
@@ -18,7 +19,8 @@
       "password": "logispin"
     }
   ],
-  "contacts": [{
+  "contacts": [
+    {
       "id": 2,
       "userId": 1,
       "address": "Via Aldo Moro, Milano",
@@ -49,13 +51,15 @@
       "surname": "De Filippo"
     }
   ],
-  "messages": [{
+  "messages": [
+    {
       "id": 1,
       "userId": 1,
       "fromNumber": "333786459",
       "text": "Ciao Marco",
-      "read": false,
-      "sentDate": 1521450600000
+      "read": true,
+      "sentDate": 1521450600000,
+      "open": true
     },
     {
       "id": 2,
@@ -63,7 +67,8 @@
       "fromNumber": "3403411243",
       "text": "Sono un numero sconosciuto, bla bla bla",
       "read": false,
-      "sentDate": 1516350780000
+      "sentDate": 1516350780000,
+      "open": true
     },
     {
       "id": 4,
@@ -71,7 +76,8 @@
       "fromNumber": "3407654321",
       "text": "Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen ",
       "read": false,
-      "sentDate": 1516350780000
+      "sentDate": 1516350780000,
+      "open": true
     },
     {
       "id": 3,

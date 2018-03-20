@@ -18,8 +18,16 @@ export default class BottomBar extends React.Component {
                     {/* Messages */}
                     <div className="bottom-bar-item col-sm p-0">
                         <NavLink to="/messages" replace={true} activeClassName="active" className="p-2">
-                            <i className="fas fa-comments fa-2x align-middle pr-2"></i>
+                            <i className="fas fa-comments fa-2x align-middle pr-2">
+                            </i>
                             <span className="align-middle pr-3">Messages</span>
+                            {
+                                /* Unread messages counter */
+                                this.props.unread > 0 ?
+                                    <span className="badge badge-danger">{this.props.unread}</span>
+                                    :
+                                    null
+                            }
                         </NavLink>
                     </div>
                     {/* Contacts */}

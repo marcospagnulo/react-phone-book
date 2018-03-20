@@ -32,7 +32,21 @@ export function* watchDeleteContacts() {
     yield takeLatest(types.DELETE_CONTACT, saga.deleteContactSaga);
 }
 
-// GET MESSAGES watcher
+// SAVE MESSAGE watcher
+export function* watchSendMessage() {
+    yield takeLatest(types.SEND_MESSAGE, saga.sendMessageSaga);
+}
+
+export function* watchReadMessage() {
+    yield takeLatest(types.READ_MESSAGE, saga.readMessageSaga);
+}
+
+// GET MESSAGE watcher
 export function* watchGetMessages() {
-    yield takeLatest(types.GET_MESSAGES, saga.getMessages);
+    yield takeLatest(types.GET_MESSAGES, saga.getMessagesSaga);
+}
+
+// DELETE MESSAGE watcher
+export function* watchDeleteMessage() {
+    yield takeLatest(types.DELETE_MESSAGE, saga.deleteMessageSaga);
 }

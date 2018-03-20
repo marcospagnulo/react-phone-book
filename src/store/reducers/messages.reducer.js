@@ -19,9 +19,8 @@ export default function (state = INITIAL_STATE, action) {
             return {
                 ...state, component: action.payload
             }
-        case types.SUBMIT_MESSAGE_SUCCESS:
+        case types.READ_MESSAGE_SUCCESS:
         case types.SELECT_MESSAGE:
-        case types.UPDATE_MESSAGE:
             return {
                 ...state,
                 message: { ...state.MESSAGE, ...action.payload }

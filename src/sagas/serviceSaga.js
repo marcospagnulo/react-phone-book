@@ -62,7 +62,7 @@ export function* submitProfileSaga({ payload }) {
     }
 }
 
-export function* getMessages({ payload }) {
+export function* getMessagesSaga({ payload }) {
     try {
         const response = yield call(service.getMessages, payload);
         yield put({ type: types.GET_MESSAGES_SUCCESS, payload: response.data });
@@ -71,13 +71,21 @@ export function* getMessages({ payload }) {
     }
 }
 
-export function* submitMessageSaga({ payload }) {
+export function* sendMessageSaga({ payload }) {
     try {
-        const response = yield call(service.subimtMessage, payload);
-        yield put({ type: types.SUBMIT_MESSAGE_SUCCESS, payload: response.data });
-        yield put({ type: types.GET_MESSAGES, payload: payload.userId })
+        const response = yield call(service.sendMessage, payload);
+        yield put({ type: types.SEND_MESSAGE_SUCCESS, payload: response.data });
     } catch (error) {
-        yield put({ type: types.SUBMIT_MESSAGE_ERROR, error });
+        yield put({ type: types.SEND_MESSAGE_ERROR, error });
+    }
+}
+
+export function* readMessageSaga({ payload }) {
+    try {
+        const response = yield call(service.readMessage, payload);
+        yield put({ type: types.READ_MESSAGE_SUCCESS, payload: response.data });
+    } catch (error) {
+        yield put({ type: types.SEND_MESSAGE_ERROR, error });
     }
 }
 

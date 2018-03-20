@@ -22,7 +22,7 @@ export default class MessageItem extends React.Component {
             <div className={this.props.className} onClick={() => this.toggle()}>
                 <i className="message-item-icon fas fa-user-circle fa-3x pr-3"></i>
 
-                <div className="message-item-from-at">
+                <div className={"message-item-from-at" + (this.props.message.read ? "" : " font-weight-bold")}>
                     <div className="pb-0">
                         <span className="message-item-from pr-1">From:</span>{this.props.message.fromNumber}
                     </div>

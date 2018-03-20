@@ -19,6 +19,7 @@ class Messages extends React.Component {
         this.handleDeleteMessage = this.handleDeleteMessage.bind(this);
         this.handleSubmitMessage = this.handleSubmitMessage.bind(this);
         this.newMessage = this.newMessage.bind(this);
+        this.actionDispatched = this.actionDispatched.bind(this);
     }
 
     componentDidMount() {
@@ -36,6 +37,10 @@ class Messages extends React.Component {
             let message = nextProps.messages.find((message) => {
                 return message.id === parseInt(messageId, 10);
             });
+            if (!message.read) {
+                message.read = true;
+                this.props.readMessageAction(message);
+            }
             this.props.selectMessageAction(message);
         }
     }
@@ -48,11 +53,11 @@ class Messages extends React.Component {
     actionDispatched(actionType) {
 
         switch (actionType) {
-            case types.SUBMIT_MESSAGE_SUCCESS:
-                this.props.showMessageBox("Message submit succuessfully", "success");
+            case types.SEND_MESSAGE_SUCCESS:
+                this.props.showMessageBox("Message send succuessfully", "success");
                 break;
-            case types.SUBMIT_MESSAGE_ERROR:
-                this.props.showMessageBox("Unable to submit message due to an error", "danger");
+            case types.SEND_MESSAGE_ERROR:
+                this.props.showMessageBox("Unable to send message due to an error", "danger");
                 break;
             case types.DELETE_MESSAGE_SUCCESS:
                 this.props.showMessageBox("Message deleted succuessfully", "success");
@@ -92,14 +97,13 @@ class Messages extends React.Component {
         const fieldName = target.name;
 
         this.props.message[fieldName] = fieldValue;
-        this.props.updateMessageAction(this.props.message);
     }
 
     /**
      * Submit the form to the message service
      */
     handleSubmitMessage() {
-        this.props.submitMessageAction({ userId: this.props.profile.id, message: this.props.message });
+        this.props.readMessageAction({ userId: this.props.profile.id, message: this.props.message });
     }
 
     /**
@@ -162,8 +166,7 @@ function matchDispatchToProps(dispatch) {
         registerMessagesComponent: profileActions.registerMessagesComponent,
         getMessagesAction: profileActions.getMessagesAction,
         selectMessageAction: profileActions.selectMessageAction,
-        updateMessageAction: profileActions.updateMessageAction,
-        submitMessageAction: profileActions.submitMessageAction,
+        readMessageAction: profileActions.readMessageAction,
         deleteMessageAction: profileActions.deleteMessageAction
     }, dispatch);
 }

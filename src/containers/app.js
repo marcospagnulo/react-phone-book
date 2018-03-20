@@ -11,6 +11,7 @@ import Contacts from './contacts';
 import Messages from './messages';
 import Login from './login';
 import * as profileActions from '../store/actions/profileActions';
+import * as messagesActions from '../store/actions/messagesActions';
 
 class App extends Component {
 
@@ -26,6 +27,10 @@ class App extends Component {
             },
             unreadMessage: 0
         };
+    }
+
+    componentDidMount() {
+        this.props.getMessagesAction(this.props.profile.id);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -111,7 +116,8 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        logoutAction: profileActions.logoutAction
+        logoutAction: profileActions.logoutAction,
+        getMessagesAction: messagesActions.getMessagesAction
     }, dispatch);
 }
 

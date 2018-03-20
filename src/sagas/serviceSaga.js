@@ -84,6 +84,7 @@ export function* readMessageSaga({ payload }) {
     try {
         const response = yield call(service.readMessage, payload);
         yield put({ type: types.READ_MESSAGE_SUCCESS, payload: response.data });
+        yield put({ type: types.GET_MESSAGES, payload: payload.userId })
     } catch (error) {
         yield put({ type: types.SEND_MESSAGE_ERROR, error });
     }

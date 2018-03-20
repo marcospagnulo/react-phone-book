@@ -17,7 +17,7 @@ export default class MessageItem extends React.Component {
     }
 
     render() {
-        const currentHeight = this.props.message.open ? this.state.height : 0;
+        const currentHeight = this.props.open ? this.state.height : 0;
         return (
             <div className={this.props.className} onClick={() => this.toggle()}>
                 <i className="message-item-icon fas fa-user-circle fa-3x pr-3"></i>

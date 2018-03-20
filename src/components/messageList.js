@@ -5,14 +5,16 @@ export default class MessageList extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { messages: [] };
+        this.state = { accordion: {} };
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.messages !== nextProps.messages) {
-            let messages = [...nextProps.messages];
-            messages.forEach((m, index) => { m.open = false; });
-            this.setState({ messages: messages });
+            let accordion = [...{}, ...this.state.accordion];
+            this.props.messages.forEach((m, index) => {
+                accordion[m.id] = accordion[m.id] !== null ? accordion[m.id] : false;
+            });
+            this.setState({ accordion: accordion });
         }
     }
 
@@ -22,13 +24,12 @@ export default class MessageList extends React.Component {
         this.props.handleMessageSelection(message);
 
         // Close all other items accordion
-        let messages = this.state.messages.slice();
-        const index = this.props.messages.findIndex((m) => { return m.id === message.id });
-        messages.forEach((m, index) => {
+        const accordion = [...this.state.accordion];
+        this.props.messages.forEach((m, index) => {
             // Toggle only on selected item
-            m.open = m.id === message.id ? !m.open : false;
+            accordion[m.id] = m.id === message.id ? !accordion[m.id] : false;
         });
-        this.setState({ messages: messages });
+        this.setState({ accordion: accordion });
     }
 
     render() {
@@ -42,6 +43,7 @@ export default class MessageList extends React.Component {
                     onClick={() => this.handleMessageSelection(message)}
                     className={className}
                     message={message}
+                    open={this.state.accordion[message.id]}
                     key={index} />
             ]
         });

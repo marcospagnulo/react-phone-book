@@ -58,8 +58,7 @@
       "fromNumber": "333786459",
       "text": "Ciao Marco",
       "read": true,
-      "sentDate": 1521450600000,
-      "open": true
+      "sentDate": 1521450600000
     },
     {
       "id": 2,
@@ -67,8 +66,7 @@
       "fromNumber": "3403411243",
       "text": "Sono un numero sconosciuto, bla bla bla",
       "read": false,
-      "sentDate": 1516350780000,
-      "open": true
+      "sentDate": 1516350780000
     },
     {
       "id": 4,
@@ -76,8 +74,15 @@
       "fromNumber": "3407654321",
       "text": "Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen ",
       "read": false,
-      "sentDate": 1516350780000,
-      "open": true
+      "sentDate": 1516350780000
+    },
+    {
+      "id": 5,
+      "userId": 1,
+      "fromNumber": "3407654323",
+      "text": "Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen Lorem ipsum dolor sit amen ",
+      "read": true,
+      "sentDate": 1516350780000
     },
     {
       "id": 3,

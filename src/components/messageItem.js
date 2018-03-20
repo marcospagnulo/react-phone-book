@@ -12,7 +12,7 @@ export default class MessageItem extends React.Component {
     toggle() {
         this.props.onClick(this.props.message);
         this.setState({
-            height: this.refs.inner.clientHeight
+            height: this.refs.inner.clientHeight + 10 //adding 10px of margin top
         })
     }
 

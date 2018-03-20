@@ -140,6 +140,12 @@ input.form-control:read-only {
   overflow: hidden;
 }
 
+.message-item-text-inner {
+  border-top: 1px solid white;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
 .message-item-text.hide {
   display: none;
 }

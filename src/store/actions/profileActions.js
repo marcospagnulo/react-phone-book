@@ -1,7 +1,7 @@
 import * as types from '../actionTypes';
 
-export const registerContactComponent = (payload) => ({
-    type: types.REGISTER_CONTACT_COMPONENT, payload
+export const registerProfileComponent = (payload) => ({
+    type: types.REGISTER_PROFILE_COMPONENT, payload
 });
 
 export const loginAction = (payload) => ({

@@ -14,7 +14,7 @@ class Profile extends React.Component {
     }
 
     componentDidMount() {
-        this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
+        this.props.registerProfileComponent(this); // Registering component to the reducer for listening action callbacks
     }
 
     handleChange(event) {
@@ -49,6 +49,8 @@ class Profile extends React.Component {
                 return;
             case types.SUBMIT_PROFILE_ERROR:
                 this.props.showMessageBox("Unable to submit profile due to an error", "danger");
+                return;
+            default:
                 return;
         }
     }
@@ -127,7 +129,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        registerContactComponent: profileActions.registerContactComponent,
+        registerProfileComponent: profileActions.registerProfileComponent,
         submitProfileAction: profileActions.submitProfileAction,
         updateProfileAction: profileActions.updateProfileAction
     }, dispatch);

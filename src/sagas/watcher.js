@@ -31,3 +31,8 @@ export function* watchGetContacts() {
 export function* watchDeleteContacts() {
     yield takeLatest(types.DELETE_CONTACT, saga.deleteContactSaga);
 }
+
+// GET MESSAGES watcher
+export function* watchGetMessages() {
+    yield takeLatest(types.GET_MESSAGES, saga.getMessages);
+}

@@ -61,3 +61,32 @@ export function* submitProfileSaga({ payload }) {
         yield put({ type: types.SUBMIT_PROFILE_ERROR, error });
     }
 }
+
+export function* getMessages({ payload }) {
+    try {
+        const response = yield call(service.getMessages, payload);
+        yield put({ type: types.GET_MESSAGES_SUCCESS, payload: response.data });
+    } catch (error) {
+        yield put({ type: types.GET_MESSAGES_ERROR, error });
+    }
+}
+
+export function* submitMessageSaga({ payload }) {
+    try {
+        const response = yield call(service.subimtMessage, payload);
+        yield put({ type: types.SUBMIT_MESSAGE_SUCCESS, payload: response.data });
+        yield put({ type: types.GET_MESSAGES, payload: payload.userId })
+    } catch (error) {
+        yield put({ type: types.SUBMIT_MESSAGE_ERROR, error });
+    }
+}
+
+export function* deleteMessageSaga({ payload }) {
+    try {
+        const response = yield call(service.deleteMessage, payload.contactId);
+        yield put({ type: types.DELETE_MESSAGE_SUCCESS, payload: response.data });
+        yield put({ type: types.GET_MESSAGES, payload: payload.userId })
+    } catch (error) {
+        yield put({ type: types.DELETE_MESSAGE_ERROR, error });
+    }
+}

@@ -1,8 +1,8 @@
 import * as types from '../actionTypes';
 
 const INITIAL_STATE = {
-    contact: null,
-    contacts: [],
+    message: null,
+    messages: [],
     component: null
 };
 
@@ -15,26 +15,26 @@ export default function (state = INITIAL_STATE, action) {
 
     switch (action.type) {
 
-        case types.REGISTER_CONTACTS_COMPONENT:
+        case types.REGISTER_MESSAGES_COMPONENT:
             return {
                 ...state, component: action.payload
             }
-        case types.SUBMIT_CONTACT_SUCCESS:
-        case types.SELECT_CONTACT:
-        case types.UPDATE_CONTACT:
+        case types.SUBMIT_MESSAGE_SUCCESS:
+        case types.SELECT_MESSAGE:
+        case types.UPDATE_MESSAGE:
             return {
                 ...state,
-                contact: { ...state.contact, ...action.payload }
+                message: { ...state.MESSAGE, ...action.payload }
             }
-        case types.GET_CONTACTS_SUCCESS:
+        case types.GET_MESSAGES_SUCCESS:
             return {
                 ...state,
-                contacts: action.payload
+                messages: action.payload
             };
-        case types.DELETE_CONTACT_SUCCESS:
+        case types.DELETE_MESSAGE_SUCCESS:
             return {
                 ...state,
-                contact: null
+                message: null
             }
         default:
             return state;

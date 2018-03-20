@@ -12,6 +12,10 @@ body {
   height: 100%;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 input.form-control {
   border: none;
   border-bottom: 1px solid lightgray;
@@ -113,15 +117,39 @@ input.form-control:read-only {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  border: 1px solid lightgray;
   color: #6c757d;
-  background-color: white;
+  background: white;
+  transition: all ease-in-out .15s;
+}
+
+#bottom-bar a:hover {
+  background: #f8f9fa;
 }
 
 #bottom-bar a.active {
-  background: #f8f9fa;
+  background: #212529;
+  color: white;
 }
 
 .bottom-bar-item {
   display: inline-block;
+}
+
+.message-item-text {
+  transition: height ease-in-out .15s;
+  overflow: hidden;
+}
+
+.message-item-text.hide {
+  display: none;
+}
+
+.message-item-text.show {
+  display: block;
+}
+
+.message-item-icon,
+.message-item-from-at {
+  display: inline-block;
+  vertical-align: middle;
 }

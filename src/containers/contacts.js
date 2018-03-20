@@ -1,6 +1,6 @@
 import React from 'react';
 import ContactInfo from '../components/contactInfo'
-import * as contactActions from '../store/actions/contactActions';
+import * as contactActions from '../store/actions/contactsActions';
 import * as types from '../store/actionTypes';
 import { history } from '../store';
 import { bindActionCreators } from 'redux';

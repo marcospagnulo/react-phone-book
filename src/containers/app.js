@@ -8,6 +8,7 @@ import AlertBox from '../components/alertBox';
 import Home from './home';
 import Profile from './profile';
 import Contacts from './contacts';
+import Messages from './messages';
 import Login from './login';
 import * as profileActions from '../store/actions/profileActions';
 
@@ -68,6 +69,8 @@ class App extends Component {
                         <Route path="/login" component={Login} />
                         <PrivateRoute path="/home" authenticated={this.props.profile !== null} component={Home} exact={true} />
                         <PrivateRoute path="/profile" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Profile} />
+                        <PrivateRoute path="/messages" authenticated={this.props.profile !== null} component={Messages} exact={true} />
+                        <PrivateRoute path="/messages/:contactId" authenticated={this.props.profile !== null} component={Messages} exact={true} />
                         <PrivateRoute path="/contacts" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />
                         <PrivateRoute path="/contacts/:contactId" authenticated={this.props.profile !== null} component={Contacts} />} />
                     </Switch>

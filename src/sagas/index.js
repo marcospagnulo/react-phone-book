@@ -10,4 +10,5 @@ export default function* startForman() {
     yield fork(watcherSaga.watchGetContacts);
     yield fork(watcherSaga.watchSubmitContact);
     yield fork(watcherSaga.watchDeleteContacts);
+    yield fork(watcherSaga.watchGetMessages);
 }

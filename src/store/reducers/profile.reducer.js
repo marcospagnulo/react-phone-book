@@ -1,7 +1,7 @@
 import * as types from '../actionTypes';
 
 const INITIAL_STATE = {
-    profile: null,
+    profile: localStorage.getItem("profile") ? JSON.parse(localStorage.getItem("profile")) : null,
     component: null
 };
 
@@ -9,14 +9,21 @@ const INITIAL_STATE = {
 export default function (state = INITIAL_STATE, action) {
     switch (action.type) {
         case types.LOGOUT:
+            localStorage.removeItem("profile");
             return {
                 ...state,
                 ...{ profile: null }
             };
         case types.LOGIN_SUCCESS:
+        case types.SUBMIT_PROFILE_SUCCESS:
+            const profile = { ...state.profile, ...action.payload };
+            localStorage.setItem("profile", JSON.stringify(profile));
+            return {
+                ...state,
+                profile: profile
+            };
         case types.GET_PROFILE_SUCCESS:
         case types.UPDATE_PROFILE:
-        case types.SUBMIT_PROFILE_SUCCESS:
             return {
                 ...state,
                 profile: { ...state.profile, ...action.payload }

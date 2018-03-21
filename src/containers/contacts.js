@@ -46,7 +46,7 @@ class Contacts extends React.Component {
         const noContactLoadead = this.props.contact === null;
         const urlChanged = this.props.location !== nextProps.location;
 
-        if (urlHasContactId && contactListLoaded && noContactLoadead || (urlChanged && urlHasContactId)) {
+        if ((urlHasContactId && contactListLoaded && noContactLoadead) || (urlChanged && urlHasContactId)) {
             let contactId = urlParams[2];
             let contact = nextProps.contacts.find((contact) => { return contact.id === parseInt(contactId, 10) });
             this.props.selectContactAction(contact);

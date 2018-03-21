@@ -11,3 +11,5 @@ export const updateContactAction = (payload) => ({ type: types.UPDATE_CONTACT, p
 export const submitContactAction = (payload) => ({ type: types.SUBMIT_CONTACT, payload });
 
 export const deleteContactAction = (payload) => ({ type: types.DELETE_CONTACT, payload });
+
+export const resetContactAction = () => ({ type: types.RESET_CONTACT });

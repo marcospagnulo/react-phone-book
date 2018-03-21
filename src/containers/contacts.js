@@ -30,12 +30,23 @@ class Contacts extends React.Component {
         this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
     }
 
+    componentWillUnmount() {
+        if (!this.props.contact.id) {
+            this.props.resetContactAction();
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
 
         const urlParams = nextProps.location.pathname.split('/');
 
-        // Load the contact if param contact id is declared in url
-        if ((urlParams.length > 2 && this.props.contact == null) || (this.props.location !== nextProps.location && urlParams.length > 2)) {
+        // Load the contact if param contact id is declared in url and no contact is currently loaded
+        const urlHasContactId = urlParams.length > 2;
+        const contactListLoaded = nextProps.contacts.length > 0 || this.props.contacts.length > 0;
+        const noContactLoadead = this.props.contact === null;
+        const urlChanged = this.props.location !== nextProps.location;
+
+        if (urlHasContactId && contactListLoaded && noContactLoadead || (urlChanged && urlHasContactId)) {
             let contactId = urlParams[2];
             let contact = nextProps.contacts.find((contact) => { return contact.id === parseInt(contactId, 10) });
             this.props.selectContactAction(contact);
@@ -78,6 +89,7 @@ class Contacts extends React.Component {
     handleContactSelection(contact) {
         if (this.props.contact == null || this.props.contact.id !== contact.id) {
             history.push("/contacts/" + contact.id);
+            this.props.selectContactAction(contact);
         }
     }
 
@@ -169,7 +181,13 @@ class Contacts extends React.Component {
 
                     {/* Contact list */}
                     <div className="card">
-                        <div className="card-header"><h5>Contact list</h5></div>
+                        <div className="card-header">
+                            <h5 className="float-left">Contact list</h5>
+                            {/* New Contact */}
+                            <button onClick={() => this.newContact()} className="btn btn-primary float-right">
+                                <i className="fas fa-plus p-1"></i><span>New contact</span>
+                            </button>
+                        </div>
                         <div className="list-group list-group-flush">
                             {this.renderContactList()}
                         </div>
@@ -185,8 +203,7 @@ class Contacts extends React.Component {
                             toggleEditMode={this.toggleEditMode}
                             handleFieldChange={this.handleFieldChange}
                             handleDeleteContact={this.handleDeleteContact}
-                            handleSubmitContact={this.handleSubmitContact}
-                            newContact={this.newContact} />
+                            handleSubmitContact={this.handleSubmitContact} />
                     }
                 </div>
             </div>
@@ -210,7 +227,8 @@ function matchDispatchToProps(dispatch) {
         selectContactAction: contactActions.selectContactAction,
         updateContactAction: contactActions.updateContactAction,
         submitContactAction: contactActions.submitContactAction,
-        deleteContactAction: contactActions.deleteContactAction
+        deleteContactAction: contactActions.deleteContactAction,
+        resetContactAction: contactActions.resetContactAction
     }, dispatch);
 }
 

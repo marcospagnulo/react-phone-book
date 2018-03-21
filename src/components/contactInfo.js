@@ -8,24 +8,17 @@ export default class ContactInfo extends React.Component {
 
             <div className="card">
                 <div className="card-header">
-                    <div className="float-left pt-2"><h5>Contact info</h5></div>
+                    <div className="float-left"><h5>Contact info</h5></div>
                     <div className="float-right">
-
-                        <div className="btn-group" role="group">
-                            {/* New Contact */}
-                            <button onClick={() => this.props.newContact()} className="btn btn-primary">
-                                <i className="fas fa-plus p-1"></i><span>New contact</span>
-                            </button>
-                            {
-                                /* Edit */
-                                this.props.contact && this.props.contact.id ?
-                                    <button onClick={() => this.props.toggleEditMode()} className={this.props.editMode ? "btn btn-secondary" : "btn btn-primary"}>
-                                        <i className="fas fa-edit p-1"></i>Edit
+                        {
+                            /* Edit */
+                            this.props.contact && this.props.contact.id ?
+                                <button onClick={() => this.props.toggleEditMode()} className={this.props.editMode ? "btn btn-secondary" : "btn btn-primary"}>
+                                    <i className="fas fa-edit p-1"></i>Edit
                                             </button>
-                                    :
-                                    null
-                            }
-                        </div>
+                                :
+                                null
+                        }
                     </div>
                 </div>
                 {

@@ -31,6 +31,7 @@ export default function (state = INITIAL_STATE, action) {
                 ...state,
                 contacts: action.payload
             };
+        case types.RESET_CONTACT:
         case types.DELETE_CONTACT_SUCCESS:
             return {
                 ...state,

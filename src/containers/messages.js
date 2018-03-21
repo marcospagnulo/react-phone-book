@@ -5,8 +5,8 @@ import { history } from '../store';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import MessageList from '../components/messageList';
-import MessageSend from '../components/messageSend';
+import MessageList from '../components/message/messageList';
+import MessageSend from '../components/message/messageSend';
 
 class Messages extends React.Component {
 

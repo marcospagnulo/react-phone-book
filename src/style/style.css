@@ -16,6 +16,10 @@ a:hover {
   text-decoration: none;
 }
 
+textarea {
+  width: 100%;
+}
+
 input.form-control {
   border: none;
   border-bottom: 1px solid lightgray;
@@ -135,6 +139,10 @@ input.form-control:read-only {
   display: inline-block;
 }
 
+.message-item {
+  position: relative;
+}
+
 .message-item-text {
   transition: height ease-in-out .15s;
   overflow: hidden;
@@ -158,4 +166,43 @@ input.form-control:read-only {
 .message-item-from-at {
   display: inline-block;
   vertical-align: middle;
+}
+
+.message-item-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.message-item .message-item-actions i {
+  transform: scale(0);
+  transition: transform ease-in-out .3s;
+  margin-left: 32px;
+}
+
+.message-item:hover .message-item-actions i {
+  transform: scale(1);
+}
+
+.message-item .message-item-actions i:hover {
+  transform: scale(1.5);
+}
+
+.message-send {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.message-send-form {
+  width: 300px;
+  margin: auto;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

@@ -36,7 +36,7 @@ export default class MessageList extends React.Component {
         let list = [];
         this.props.messages.forEach((message, index) => {
             const active = this.props.message !== null && message.id === this.props.message.id;
-            const className = "message-item list-group-item list-group-item-action " + (active ? "active" : "");
+            const className = "message-item list-group-item list-group-item-action" + (active ? " active" : "");
             list = [
                 ...list,
                 <MessageItem

@@ -1,6 +1,5 @@
 {
-  "profiles": [
-    {
+  "profiles": [{
       "id": 1,
       "name": "Marco",
       "surname": "Spagnulo",
@@ -19,8 +18,7 @@
       "password": "logispin"
     }
   ],
-  "contacts": [
-    {
+  "contacts": [{
       "id": 2,
       "userId": 1,
       "address": "Via Aldo Moro, Milano",
@@ -51,8 +49,7 @@
       "surname": "De Filippo"
     }
   ],
-  "messages": [
-    {
+  "messages": [{
       "id": 1,
       "userId": 1,
       "fromNumber": "333786459",

@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MessageList from '../components/messageList';
+import MessageSend from '../components/messageSend';
 
 class Messages extends React.Component {
 
@@ -17,10 +18,12 @@ class Messages extends React.Component {
         this.actionDispatched = this.actionDispatched.bind(this);
         this.handleMessageSelection = this.handleMessageSelection.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleSubmitMessage = this.handleSubmitMessage.bind(this);
-        this.newMessage = this.newMessage.bind(this);
+        this.handleSendMessage = this.handleSendMessage.bind(this);
         this.handleReplyMessage = this.handleReplyMessage.bind(this);
         this.handleDeleteMessage = this.handleDeleteMessage.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
+        this.state = { to: "", text: "", send: false }
     }
 
     componentDidMount() {
@@ -76,6 +79,7 @@ class Messages extends React.Component {
     handleReplyMessage(evt, message) {
         evt.stopPropagation();
         this.handleMessageSelection(message);
+        this.setState({ to: message.fromNumber, text: "", send: true });
         console.log("reply message", message);
     }
 
@@ -83,7 +87,6 @@ class Messages extends React.Component {
         evt.stopPropagation();
         this.handleMessageSelection({ id: messageId });
         this.props.deleteMessageAction({ userId: this.props.profile.id, messageId: messageId });
-        console.log("delete message", messageId);
     }
 
     /**
@@ -109,37 +112,29 @@ class Messages extends React.Component {
         const fieldValue = target.type === 'checkbox' ? target.checked : target.value;
         const fieldName = target.name;
 
-        this.props.message[fieldName] = fieldValue;
+        // Storing input into component state
+        this.setState({ [fieldName]: fieldValue });
     }
 
     /**
      * Submit the form to the message service
      */
-    handleSubmitMessage() {
-        this.props.readMessageAction({ userId: this.props.profile.id, message: this.props.message });
-    }
-
-    /**
-     * Clear all the inputs inside the form
-     */
-    resetForm() {
-        this.props.selectMessageAction({
-            address: "",
-            email: "",
-            id: null,
-            mobile: "",
-            name: "",
-            password: "",
-            surname: ""
+    handleSendMessage(evt) {
+        evt.preventDefault();
+        this.props.sendMessageAction({
+            "userId": this.state.to,
+            "fromNumber": this.props.profile.mobile,
+            "text": this.state.text,
+            "read": false,
+            "sentDate": new Date().getTime()
         });
     }
 
     /**
-     * Create a new message form
+     * Close send message modal
      */
-    newMessage() {
-        this.setState({ editMode: true });
-        this.resetForm();
+    handleClose() {
+        this.setState({ to: "", text: "", send: false });
     }
 
     render() {
@@ -158,6 +153,15 @@ class Messages extends React.Component {
                             replyMessage={this.handleReplyMessage} />
                     </div>
                 </div>
+                {
+                    this.state.send ?
+                        <MessageSend
+                            onFieldChange={this.handleFieldChange}
+                            onSendMessage={this.handleSendMessage}
+                            onClose={this.handleClose}
+                            to={this.state.to} />
+                        : null
+                }
             </div>
         );
     }
@@ -177,6 +181,7 @@ function matchDispatchToProps(dispatch) {
         registerMessagesComponent: messageActions.registerMessagesComponent,
         getMessagesAction: messageActions.getMessagesAction,
         selectMessageAction: messageActions.selectMessageAction,
+        sendMessageAction: messageActions.sendMessageAction,
         readMessageAction: messageActions.readMessageAction,
         deleteMessageAction: messageActions.deleteMessageAction
     }, dispatch);

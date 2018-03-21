@@ -96,7 +96,7 @@ class Profile extends React.Component {
                                 onFieldChange={this.handleChange}
                                 fieldName="address"
                                 fieldLabel="Mobile"
-                                fieldValue={this.props.profile.address} />
+                                fieldValue={this.props.profile.mobile} />
                             {/* Email */}
                             <FormField
                                 edit={true}

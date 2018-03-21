@@ -31,7 +31,7 @@ class Contacts extends React.Component {
     }
 
     componentWillUnmount() {
-        if (!this.props.contact.id) {
+        if (this.props.contact && !this.props.contact.id) {
             this.props.resetContactAction();
         }
     }

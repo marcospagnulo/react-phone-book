@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as profileActions from '../store/actions/profileActions';
 import { history } from '../store';
+import * as types from '../store/actionTypes';
 
 class Login extends React.Component {
 
@@ -13,9 +14,26 @@ class Login extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.profile) {
-            history.push("/home")
+    componentDidMount() {
+        this.props.registerProfileComponent(this); // Registering component to the reducer for listening action callbacks
+    }
+
+    /**
+     * Function called by the reducer as a callback of some actions
+     * 
+     * @param {*} actionType 
+     */
+    actionDispatched(actionType) {
+
+        switch (actionType) {
+            case types.LOGIN_SUCCESS:
+                history.push("/home")
+                return;
+            case types.LOGIN_ERROR:
+                this.props.showMessageBox("Login failed", "danger");
+                return;
+            default:
+                return;
         }
     }
 
@@ -39,7 +57,7 @@ class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.login({ username: this.state.username, password: this.state.password });
+        this.props.loginAction({ username: this.state.username, password: this.state.password });
     }
 
     render() {
@@ -87,7 +105,8 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        login: profileActions.loginAction
+        loginAction: profileActions.loginAction,
+        registerProfileComponent: profileActions.registerProfileComponent
     }, dispatch);
 }
 

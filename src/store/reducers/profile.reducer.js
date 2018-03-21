@@ -7,7 +7,17 @@ const INITIAL_STATE = {
 
 // Handles image related actions
 export default function (state = INITIAL_STATE, action) {
+
+    if (state.component) {
+        state.component.actionDispatched(action.type);
+    }
+
     switch (action.type) {
+
+        case types.REGISTER_PROFILE_COMPONENT:
+            return {
+                ...state, component: action.payload
+            }
         case types.LOGOUT:
             localStorage.removeItem("profile");
             return {

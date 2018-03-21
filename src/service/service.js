@@ -3,7 +3,7 @@ const SERVICE_URL = "http://localhost:3001"
 
 /* Profile Service */
 export const login = (loginForm) => {
-    return axios.get(SERVICE_URL + "/profiles?username=" + loginForm.username + "&password=" + loginForm.password);
+    return axios.get(SERVICE_URL + "/profiles?email=" + loginForm.username + "&password=" + loginForm.password);
 }
 
 export const getUserProfile = () => {

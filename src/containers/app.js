@@ -30,7 +30,9 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.props.getMessagesAction(this.props.profile.id);
+        if (this.props.profile) {
+            this.props.getMessagesAction(this.props.profile.id);
+        }
     }
 
     componentWillReceiveProps(nextProps) {

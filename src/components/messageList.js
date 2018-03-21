@@ -41,6 +41,8 @@ export default class MessageList extends React.Component {
                 ...list,
                 <MessageItem
                     onClick={() => this.handleMessageSelection(message)}
+                    deleteMessage={this.props.deleteMessage}
+                    replyMessage={this.props.replyMessage}
                     className={className}
                     message={message}
                     open={this.state.accordion[message.id]}

@@ -92,7 +92,7 @@ export function* readMessageSaga({ payload }) {
 
 export function* deleteMessageSaga({ payload }) {
     try {
-        const response = yield call(service.deleteMessage, payload.contactId);
+        const response = yield call(service.deleteMessage, payload.messageId);
         yield put({ type: types.DELETE_MESSAGE_SUCCESS, payload: response.data });
         yield put({ type: types.GET_MESSAGES, payload: payload.userId })
     } catch (error) {

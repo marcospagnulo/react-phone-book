@@ -1,5 +1,5 @@
 import React from 'react';
-import * as profileActions from '../store/actions/messagesActions';
+import * as messageActions from '../store/actions/messagesActions';
 import * as types from '../store/actionTypes';
 import { history } from '../store';
 import { bindActionCreators } from 'redux';
@@ -14,12 +14,13 @@ class Messages extends React.Component {
         super(props);
 
         // Bind functions
+        this.actionDispatched = this.actionDispatched.bind(this);
         this.handleMessageSelection = this.handleMessageSelection.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
-        this.handleDeleteMessage = this.handleDeleteMessage.bind(this);
         this.handleSubmitMessage = this.handleSubmitMessage.bind(this);
         this.newMessage = this.newMessage.bind(this);
-        this.actionDispatched = this.actionDispatched.bind(this);
+        this.handleReplyMessage = this.handleReplyMessage.bind(this);
+        this.handleDeleteMessage = this.handleDeleteMessage.bind(this);
     }
 
     componentDidMount() {
@@ -36,7 +37,7 @@ class Messages extends React.Component {
             let message = nextProps.messages.find((message) => {
                 return message.id === parseInt(messageId, 10);
             });
-            if (!message.read) {
+            if (message && !message.read) {
                 message.read = true;
                 this.props.readMessageAction(message);
             }
@@ -70,6 +71,19 @@ class Messages extends React.Component {
             default:
                 break;
         }
+    }
+
+    handleReplyMessage(evt, message) {
+        evt.stopPropagation();
+        this.handleMessageSelection(message);
+        console.log("reply message", message);
+    }
+
+    handleDeleteMessage(evt, messageId) {
+        evt.stopPropagation();
+        this.handleMessageSelection({ id: messageId });
+        this.props.deleteMessageAction({ userId: this.props.profile.id, messageId: messageId });
+        console.log("delete message", messageId);
     }
 
     /**
@@ -106,13 +120,6 @@ class Messages extends React.Component {
     }
 
     /**
-     * Call the action for deleting a message
-     */
-    handleDeleteMessage() {
-        this.props.deleteMessageAction({ userId: this.props.profile.id, messageId: this.props.message.id });
-    }
-
-    /**
      * Clear all the inputs inside the form
      */
     resetForm() {
@@ -143,7 +150,12 @@ class Messages extends React.Component {
                     {/* message list */}
                     <div className="card">
                         <div className="card-header"><span>Message list</span></div>
-                        <MessageList message={this.props.message} messages={this.props.messages} handleMessageSelection={(message) => this.handleMessageSelection(message)} />
+                        <MessageList
+                            message={this.props.message}
+                            messages={this.props.messages}
+                            handleMessageSelection={this.handleMessageSelection}
+                            deleteMessage={this.handleDeleteMessage}
+                            replyMessage={this.handleReplyMessage} />
                     </div>
                 </div>
             </div>
@@ -162,11 +174,11 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        registerMessagesComponent: profileActions.registerMessagesComponent,
-        getMessagesAction: profileActions.getMessagesAction,
-        selectMessageAction: profileActions.selectMessageAction,
-        readMessageAction: profileActions.readMessageAction,
-        deleteMessageAction: profileActions.deleteMessageAction
+        registerMessagesComponent: messageActions.registerMessagesComponent,
+        getMessagesAction: messageActions.getMessagesAction,
+        selectMessageAction: messageActions.selectMessageAction,
+        readMessageAction: messageActions.readMessageAction,
+        deleteMessageAction: messageActions.deleteMessageAction
     }, dispatch);
 }
 

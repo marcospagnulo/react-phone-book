@@ -31,6 +31,11 @@ export default class MessageItem extends React.Component {
                     </div>
                 </div>
 
+                <div className="message-item-actions p-3">
+                    <i className="fas fa-trash pr-3" onClick={(evt) => this.props.deleteMessage(evt, this.props.message.id)}></i>
+                    <i className="fas fa-reply" onClick={(evt) => this.props.replyMessage(evt, this.props.message)}></i>
+                </div>
+
                 <div className="message-item-text" style={{ height: currentHeight + "px" }}>
                     <div className="message-item-text-inner" ref="inner">
                         {this.props.message.text}

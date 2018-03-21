@@ -28,7 +28,6 @@ class Contacts extends React.Component {
 
     componentDidMount() {
         this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
-        this.props.getContactsAction(this.props.profile.id);
     }
 
     componentWillReceiveProps(nextProps) {

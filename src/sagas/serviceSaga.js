@@ -45,6 +45,8 @@ export function* loginSaga({ payload }) {
         const response = yield call(service.login, payload);
         if (response.data.length > 0) {
             yield put({ type: types.LOGIN_SUCCESS, payload: response.data[0] });
+            yield put({ type: types.GET_MESSAGES, payload: response.data[0].id })
+            yield put({ type: types.GET_CONTACTS, payload: response.data[0].id })
         } else {
             yield put({ type: types.LOGIN_ERROR, payload: null });
         }

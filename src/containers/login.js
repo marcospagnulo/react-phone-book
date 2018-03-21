@@ -18,6 +18,12 @@ class Login extends React.Component {
         this.props.registerProfileComponent(this); // Registering component to the reducer for listening action callbacks
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.profile) {
+            history.push("/home")
+        }
+    }
+
     /**
      * Function called by the reducer as a callback of some actions
      * 
@@ -26,9 +32,6 @@ class Login extends React.Component {
     actionDispatched(actionType) {
 
         switch (actionType) {
-            case types.LOGIN_SUCCESS:
-                history.push("/home")
-                return;
             case types.LOGIN_ERROR:
                 this.props.showMessageBox("Login failed", "danger");
                 return;
@@ -100,7 +103,7 @@ class Login extends React.Component {
 
 // Subscribe component to redux store and merge the state into component's props
 function mapStateToProps(state) {
-    return { profile: state.profile };
+    return { profile: state.profile.profile };
 };
 
 function matchDispatchToProps(dispatch) {

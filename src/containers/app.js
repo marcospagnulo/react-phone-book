@@ -12,6 +12,7 @@ import Messages from './messages';
 import Login from './login';
 import * as profileActions from '../store/actions/profileActions';
 import * as messagesActions from '../store/actions/messagesActions';
+import * as contactsActions from '../store/actions/contactsActions';
 
 class App extends Component {
 
@@ -32,6 +33,7 @@ class App extends Component {
     componentDidMount() {
         if (this.props.profile) {
             this.props.getMessagesAction(this.props.profile.id);
+            this.props.getContactsAction(this.props.profile.id);
         }
     }
 
@@ -84,13 +86,13 @@ class App extends Component {
                 <div className="container-fluid">
                     <Switch>
                         <PrivateRoute path="/" authenticated={this.props.profile !== null} component={Home} exact={true} />
-                        <Route path="/login" component={Login} />
+                        <Route path="/login" render={(props) => <Login showMessageBox={this.showMessageBox} {...props} />} />
                         <PrivateRoute path="/home" authenticated={this.props.profile !== null} component={Home} exact={true} />
                         <PrivateRoute path="/profile" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Profile} />
                         <PrivateRoute path="/messages" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
                         <PrivateRoute path="/messages/:contactId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
                         <PrivateRoute path="/contacts" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />
-                        <PrivateRoute path="/contacts/:contactId" authenticated={this.props.profile !== null} component={Contacts} />} />
+                        <PrivateRoute path="/contacts/:contactId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />} />
                     </Switch>
                 </div>
 
@@ -119,7 +121,8 @@ function mapStateToProps(state) {
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         logoutAction: profileActions.logoutAction,
-        getMessagesAction: messagesActions.getMessagesAction
+        getMessagesAction: messagesActions.getMessagesAction,
+        getContactsAction: contactsActions.getContactsAction
     }, dispatch);
 }
 

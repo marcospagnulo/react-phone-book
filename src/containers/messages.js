@@ -22,7 +22,9 @@ class Messages extends React.Component {
         this.handleReplyMessage = this.handleReplyMessage.bind(this);
         this.handleDeleteMessage = this.handleDeleteMessage.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleContactSelection = this.handleContactSelection.bind(this);
 
+        // Init state
         this.state = { to: "", text: "", send: false }
     }
 
@@ -119,8 +121,7 @@ class Messages extends React.Component {
     /**
      * Submit the form to the message service
      */
-    handleSendMessage(evt) {
-        evt.preventDefault();
+    handleSendMessage() {
         this.props.sendMessageAction({
             "userId": this.state.to,
             "fromNumber": this.props.profile.mobile,
@@ -130,11 +131,19 @@ class Messages extends React.Component {
         });
     }
 
+    handleContactSelection(contact) {
+        this.setState({ to: contact.mobile });
+    }
+
     /**
      * Close send message modal
      */
     handleClose() {
         this.setState({ to: "", text: "", send: false });
+    }
+
+    newMessage() {
+        this.setState({ to: "", text: "", send: true });
     }
 
     render() {
@@ -144,7 +153,13 @@ class Messages extends React.Component {
                 <div className="w-100 p-3">
                     {/* message list */}
                     <div className="card">
-                        <div className="card-header"><span>Message list</span></div>
+                        <div className="card-header">
+                            <span>Message list</span>
+                            {/* New Message */}
+                            <button onClick={() => this.newMessage()} className="btn btn-primary float-right">
+                                <i className="fas fa-plus p-1"></i><span>New message</span>
+                            </button>
+                        </div>
                         <MessageList
                             message={this.props.message}
                             messages={this.props.messages}
@@ -156,8 +171,10 @@ class Messages extends React.Component {
                 {
                     this.state.send ?
                         <MessageSend
+                            contacts={this.props.contacts}
                             onFieldChange={this.handleFieldChange}
                             onSendMessage={this.handleSendMessage}
+                            onContactSelection={this.handleContactSelection}
                             onClose={this.handleClose}
                             to={this.state.to} />
                         : null
@@ -172,7 +189,8 @@ function mapStateToProps(state) {
     return {
         messages: state.messages.messages,
         message: state.messages.message,
-        profile: state.profile.profile
+        profile: state.profile.profile,
+        contacts: state.contacts.contacts
     };
 };
 

@@ -96,6 +96,8 @@ class App extends Component {
                     </Switch>
                 </div>
 
+                <div className="bottom-empty-space"></div>
+
                 {
                     /* Bottom bar */
                     this.props.profile !== null ? <BottomBar unread={this.state.unreadMessage} /> : null

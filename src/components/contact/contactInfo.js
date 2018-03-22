@@ -1,5 +1,5 @@
 import React from 'react';
-import FormField from './formField';
+import FormField from '../formField';
 
 export default class ContactInfo extends React.Component {
 

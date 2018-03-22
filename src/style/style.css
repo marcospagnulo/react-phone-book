@@ -54,6 +54,13 @@ input.form-control:read-only {
   margin-bottom: 1px;
 }
 
+.list-group-item.active {
+  background-color: #c73019;
+  border-color: #c73019;
+}
+
+/* Alert Box */
+
 #alertbox {
   position: fixed;
   top: 0px;
@@ -88,6 +95,8 @@ input.form-control:read-only {
   bottom: 0;
 }
 
+/* Toolbar */
+
 #toolbar {
   position: fixed;
   top: 0;
@@ -95,6 +104,7 @@ input.form-control:read-only {
   right: 0;
   height: 48px;
   z-index: 3;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.76);
 }
 
 .toolbar-empty-space {
@@ -118,16 +128,19 @@ input.form-control:read-only {
   color: white;
 }
 
+/* Bottom bar */
+
 #bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 3;
+  box-shadow: 0 0px 10px 0 rgba(0, 0, 0, 0.76);
 }
 
 #bottom-bar .col-sm {
-  border: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
 
 #bottom-bar a {
@@ -136,23 +149,45 @@ input.form-control:read-only {
   display: inline-block;
   vertical-align: middle;
   text-align: center;
-  color: #6c757d;
-  background: white;
+  color: white;
+  background: #212529;
   transition: all ease-in-out .15s;
+}
+
+#bottom-bar a.active {
+  background: white !important;
+  color: #212529 !important;
 }
 
 #bottom-bar a:hover {
   background: #f8f9fa;
-}
-
-#bottom-bar a.active {
-  background: #212529;
-  color: white;
+  color: #212529;
 }
 
 .bottom-bar-item {
   display: inline-block;
 }
+
+.bottom-empty-space {
+  height: 48px;
+}
+
+/* Contact */
+
+.contact-list-item-badge {
+  border: 2px solid gray;
+  border-radius: 100%;
+  padding-top: 8px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  display: inline-block;
+  font-weight: bold;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.76);
+  color: white;
+}
+
+/* Message */
 
 .message-item {
   position: relative;
@@ -191,7 +226,7 @@ input.form-control:read-only {
 
 .message-item .message-item-actions i {
   transform: scale(0);
-  transition: transform ease-in-out .3s;
+  transition: transform ease-in-out .15s;
   margin-left: 32px;
 }
 
@@ -212,7 +247,7 @@ input.form-control:read-only {
 }
 
 .message-send-form {
-  width: 300px;
+  width: 600px;
   margin: auto;
   height: 400px;
   position: absolute;
@@ -220,4 +255,14 @@ input.form-control:read-only {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.message-send-to-container {
+  position: relative;
+}
+
+.message-send-contact-list {
+  position: absolute;
+  max-height: 200px;
+  overflow-y: scroll;
 }

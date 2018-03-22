@@ -1,11 +1,12 @@
 import React from 'react';
-import ContactInfo from '../components/contactInfo'
+import ContactInfo from '../components/contact/contactInfo'
 import * as contactActions from '../store/actions/contactsActions';
 import * as types from '../store/actionTypes';
 import { history } from '../store';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import ContactList from '../components/contact/contactList';
 
 
 class Contacts extends React.Component {
@@ -16,7 +17,6 @@ class Contacts extends React.Component {
 
         // Bind functions
         this.handleContactSelection = this.handleContactSelection.bind(this);
-        this.renderContactList = this.renderContactList.bind(this);
         this.toggleEditMode = this.toggleEditMode.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleDeleteContact = this.handleDeleteContact.bind(this);
@@ -153,24 +153,6 @@ class Contacts extends React.Component {
         this.resetForm();
     }
 
-    renderContactList() {
-        let list = [];
-        this.props.contacts.forEach((contact, index) => {
-            const active = this.props.contact !== null && contact.id === this.props.contact.id;
-            const className = "list-group-item list-group-item-action " + (active ? "active" : "");
-            list = [
-                ...list,
-                <button
-                    onClick={this.handleContactSelection.bind(this, contact)}
-                    className={className}
-                    key={index}>
-                    {contact.surname} {contact.name}
-                </button>
-            ]
-        });
-        return list;
-    }
-
     render() {
 
         return (
@@ -189,7 +171,11 @@ class Contacts extends React.Component {
                             </button>
                         </div>
                         <div className="list-group list-group-flush">
-                            {this.renderContactList()}
+                            <ContactList
+                                itemClassName="list-group-item list-group-item-action"
+                                contact={this.props.contact}
+                                contacts={this.props.contacts}
+                                onContactSelection={this.handleContactSelection} />
                         </div>
                     </div>
                 </div>

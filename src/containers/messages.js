@@ -154,7 +154,7 @@ class Messages extends React.Component {
                     {/* message list */}
                     <div className="card">
                         <div className="card-header">
-                            <span>Message list</span>
+                            <h4 className="float-left">Messages</h4>
                             {/* New Message */}
                             <button onClick={() => this.newMessage()} className="btn btn-primary float-right">
                                 <i className="fas fa-plus p-1"></i><span>New message</span>

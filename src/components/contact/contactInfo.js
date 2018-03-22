@@ -8,7 +8,7 @@ export default class ContactInfo extends React.Component {
 
             <div className="card">
                 <div className="card-header">
-                    <div className="float-left"><h5>Contact info</h5></div>
+                    <div className="float-left"><h4>Contact info</h4></div>
                     <div className="float-right">
                         {
                             /* Edit */

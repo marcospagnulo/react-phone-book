@@ -11,8 +11,8 @@ export default class BottomBar extends React.Component {
                     {/* Home */}
                     <div className="bottom-bar-item col-sm p-0">
                         <NavLink to="/home" replace={true} activeClassName="active" className="p-2">
-                            <i className="fas fa-home fa-2x align-middle pr-2"></i>
-                            <span className="align-middle pr-3">Home</span>
+                            <i className="fas fa-calendar-alt fa-2x align-middle pr-2"></i>
+                            <span className="align-middle pr-3">Calendar</span>
                         </NavLink>
                     </div>
                     {/* Messages */}

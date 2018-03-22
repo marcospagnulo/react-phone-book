@@ -164,7 +164,7 @@ class Contacts extends React.Component {
                     {/* Contact list */}
                     <div className="card">
                         <div className="card-header">
-                            <h5 className="float-left">Contact list</h5>
+                            <h4 className="float-left">Contact list</h4>
                             {/* New Contact */}
                             <button onClick={() => this.newContact()} className="btn btn-primary float-right">
                                 <i className="fas fa-plus p-1"></i><span>New contact</span>

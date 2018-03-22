@@ -266,3 +266,43 @@ input.form-control:read-only {
   max-height: 200px;
   overflow-y: scroll;
 }
+
+/* Calendar */
+
+.calendar-years-item,
+.calendar-months-item {
+  vertical-align: bottom;
+  cursor: pointer;
+  transition: all ease-in-out .15s;
+}
+
+.calendar-years-item.active,
+.calendar-months-item.active {
+  font-weight: bold;
+  margin-top: -2px;
+  transform: scale(1.6) !important;
+}
+
+.calendar-years-item:hover,
+.calendar-months-item:hover {
+  transform: scale(1.4);
+  margin-top: -2px;
+}
+
+.calendar-dates {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.calendar-dates-item {
+  border: 1px solid lightgray;
+  height: 120px;
+  width: 110px;
+  display: inline-block;
+}
+
+.calendar-dates-item.active {
+  font-weight: bold;
+}
+
+.calendar-item-messages {}

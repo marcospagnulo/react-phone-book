@@ -38,7 +38,6 @@ export default class MessageSend extends React.Component {
                                         fieldType="textarea"
                                         fieldName="text"
                                         fieldLabel="Text" />
-
                                 </div>
 
                                 <ContactList

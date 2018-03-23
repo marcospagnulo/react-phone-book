@@ -29,24 +29,21 @@ class Messages extends React.Component {
     }
 
     componentDidMount() {
+
         this.props.registerMessagesComponent(this); // Registering component to the reducer for listening action callbacks
-    }
 
-    componentWillReceiveProps(nextProps) {
+        // Select message from param url
+        const messageId = this.props.match.params.messageId;
+        if (this.props.match.params.messageId) {
 
-        const urlParams = nextProps.location.pathname.split('/');
-
-        // Load the message if param message id is declared in url
-        if ((urlParams.length > 2 && this.props.message == null) || (this.props.location !== nextProps.location && urlParams.length > 2)) {
-            let messageId = urlParams[2];
-            let message = nextProps.messages.find((message) => {
+            // Find message in list
+            let message = this.props.messages.find((message) => {
                 return message.id === parseInt(messageId, 10);
             });
-            if (message && !message.read) {
-                message.read = true;
-                this.props.readMessageAction(message);
+
+            if (message) {
+                this.handleMessageSelection(message);
             }
-            this.props.selectMessageAction(message);
         }
     }
 
@@ -97,8 +94,16 @@ class Messages extends React.Component {
      * @param {*} message 
      */
     handleMessageSelection(message) {
+
         if (this.props.message == null || this.props.message.id !== message.id) {
-            history.push("/messages/" + message.id);
+
+            //Set read state to message if unread
+            if (message && !message.read) {
+                message.read = true;
+                this.props.readMessageAction(message);
+            }
+
+            this.props.selectMessageAction(message);
         }
     }
 

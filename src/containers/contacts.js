@@ -28,28 +28,16 @@ class Contacts extends React.Component {
 
     componentDidMount() {
         this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
+        let contactId = this.props.match.params.contactId;
+        if (contactId) {
+            let contact = this.props.contacts.find((contact) => { return contact.id === parseInt(contactId, 10) });
+            this.props.selectContactAction(contact);
+        }
     }
 
     componentWillUnmount() {
         if (this.props.contact && !this.props.contact.id) {
             this.props.resetContactAction();
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-        const urlParams = nextProps.location.pathname.split('/');
-
-        // Load the contact if param contact id is declared in url and no contact is currently loaded
-        const urlHasContactId = urlParams.length > 2;
-        const contactListLoaded = nextProps.contacts.length > 0 || this.props.contacts.length > 0;
-        const noContactLoadead = this.props.contact === null;
-        const urlChanged = this.props.location !== nextProps.location;
-
-        if ((urlHasContactId && contactListLoaded && noContactLoadead) || (urlChanged && urlHasContactId)) {
-            let contactId = urlParams[2];
-            let contact = nextProps.contacts.find((contact) => { return contact.id === parseInt(contactId, 10) });
-            this.props.selectContactAction(contact);
         }
     }
 
@@ -88,7 +76,6 @@ class Contacts extends React.Component {
      */
     handleContactSelection(contact) {
         if (this.props.contact == null || this.props.contact.id !== contact.id) {
-            history.push("/contacts/" + contact.id);
             this.props.selectContactAction(contact);
         }
     }

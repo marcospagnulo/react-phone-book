@@ -9,6 +9,9 @@ export default class MessageItem extends React.Component {
         this.toggle = this.toggle.bind(this);
     }
 
+    /**
+     * Toggle the height of a message
+     */
     toggle() {
         this.props.onClick(this.props.message);
         this.setState({

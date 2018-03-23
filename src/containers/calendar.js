@@ -84,6 +84,11 @@ class Calendar extends React.Component {
         return weekDaysHtml;
     }
 
+    /**
+     * Return the message received in a day
+     * 
+     * @param {*} date 
+     */
     getMessageByDay(date) {
 
         const day = new Date();
@@ -102,7 +107,12 @@ class Calendar extends React.Component {
         return messages;
     }
 
-    getEventsByDay() {
+    /**
+     * Return the events scheduled in a day
+     *
+     * @param {*} date
+     */
+    getEventsByDay(date) {
         return [];
     }
 

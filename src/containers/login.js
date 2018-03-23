@@ -58,6 +58,10 @@ class Login extends React.Component {
         })
     }
 
+    /**
+     * Invoke the login service on subimt of login form
+     * @param {*} event 
+     */
     handleSubmit(event) {
         event.preventDefault();
         this.props.loginAction({ username: this.state.username, password: this.state.password });

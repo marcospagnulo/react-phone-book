@@ -30,6 +30,11 @@ export default class CalendarDay extends React.Component {
         return (<div>{messages}</div>)
     }
 
+    /**
+     * Render the number of message in a day
+     * 
+     * @param {*} date 
+     */
     renderMessageCounter(date) {
 
         const day = new Date();
@@ -54,6 +59,12 @@ export default class CalendarDay extends React.Component {
         )
     }
 
+    /**
+     * Toggle the visibility of a detail nested in a day
+     * 
+     * @param {*} evt 
+     * @param {*} toggle 
+     */
     toggleDetail(evt, toggle) {
         evt.stopPropagation();
         this.setState({ showDetail: toggle })

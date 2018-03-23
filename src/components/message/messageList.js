@@ -18,6 +18,11 @@ export default class MessageList extends React.Component {
         }
     }
 
+    /**
+     * Manage the message selection
+     * 
+     * @param {*} message 
+     */
     handleMessageSelection(message) {
 
         // Call paren handler

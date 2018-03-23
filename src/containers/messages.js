@@ -75,6 +75,12 @@ class Messages extends React.Component {
         }
     }
 
+    /**
+     * Manage the click on reply message button
+     * 
+     * @param {*} evt 
+     * @param {*} message 
+     */
     handleReplyMessage(evt, message) {
         evt.stopPropagation();
         this.handleMessageSelection(message);
@@ -82,6 +88,12 @@ class Messages extends React.Component {
         console.log("reply message", message);
     }
 
+    /**
+     * Manage the click on delete message button
+     * 
+     * @param {*} evt 
+     * @param {*} messageId 
+     */
     handleDeleteMessage(evt, messageId) {
         evt.stopPropagation();
         this.handleMessageSelection({ id: messageId });
@@ -136,6 +148,11 @@ class Messages extends React.Component {
         });
     }
 
+    /**
+     * Store in component state the selected contact
+     * 
+     * @param {*} contact 
+     */
     handleContactSelection(contact) {
         this.setState({ to: contact.mobile });
     }
@@ -147,6 +164,9 @@ class Messages extends React.Component {
         this.setState({ to: "", text: "", send: false });
     }
 
+    /**
+     * Reset the field of send message form
+     */
     newMessage() {
         this.setState({ to: "", text: "", send: true });
     }

@@ -1,7 +1,8 @@
 import React from 'react';
-import * as util from '../../util/util'
+import * as util from '../util/util'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import CalendarDay from '../components/calendar/calendarDay';
 
 class Calendar extends React.Component {
 
@@ -66,33 +67,24 @@ class Calendar extends React.Component {
     }
 
     /**
-     * Render month selector
+     * Render day of week
      */
-    renderDates() {
-        let datesHtml = [];
-        for (let i = 1; i < util.getDayPerMonths()[this.state.month] + 1; i++) {
-            datesHtml = [
-                ...datesHtml,
-                <div
-                    key={"date" + i}
-                    className={(i === this.state.date ? "active " : "") + "calendar-dates-item p-3"}>
-                    {i}
-                    <div className="calendar-item-messages">
-                        {this.renderCalendarDateMessages(i)}
-                    </div>
+    renderDayOfWeek() {
+        const weekDays = util.getWeekDays();
+        let weekDaysHtml = [];
+        weekDays.forEach((day, index) => {
+            weekDaysHtml = [
+                ...weekDaysHtml,
+                <div key={"day" + index} className="calendar-week-item p-3">
+                    {day}
                 </div>
             ];
-        }
+        })
 
-        return datesHtml;
+        return weekDaysHtml;
     }
 
-    /**
-     * Render incoming message in a particular day
-     * 
-     * @param {*} date - date to
-     */
-    renderCalendarDateMessages(date) {
+    getMessageByDay(date) {
 
         const day = new Date();
         day.setFullYear(this.state.year);
@@ -102,11 +94,38 @@ class Calendar extends React.Component {
         let messages = [];
         this.props.messages.forEach((message, index) => {
             const sentDate = new Date(message.sentDate);
-            if (day.getDate() === sentDate.getDate() && day.getMonth() === sentDate.getMonth() && day.getFullYear() === sentDate.getFullYear()) {
-                messages = [...messages, <i className="fas fa-comments"></i>];
+            if (util.areSameDay(day, sentDate)) {
+                messages = [...messages, message];
             }
         })
-        return (<div>{messages}</div>)
+
+        return messages;
+    }
+
+    getEventsByDay() {
+        return [];
+    }
+
+    /**
+     * Render month selector
+     */
+    renderDates() {
+        let datesHtml = [];
+        for (let i = 1; i < util.getDayPerMonths()[this.state.month] + 1; i++) {
+            datesHtml = [
+                ...datesHtml,
+                <CalendarDay
+                    month={this.state.month}
+                    year={this.state.year}
+                    date={i}
+                    events={this.getEventsByDay(i)}
+                    messages={this.getMessageByDay(i)}
+                    className={(i === this.props.date ? "active" : "")}
+                    key={"date" + i} />
+            ];
+        }
+
+        return datesHtml;
     }
 
     render() {
@@ -120,8 +139,12 @@ class Calendar extends React.Component {
                 <div className="calendar-months d-flex justify-content-center">
                     {this.renderMonths()}
                 </div>
+                {/* Day of week */}
+                <div className="calendar-week d-flex justify-content-center">
+                    {this.renderDayOfWeek()}
+                </div>
                 {/* Dates*/}
-                <div className="calendar-dates">
+                <div className="calendar-dates d-flex flex-wrap">
                     {this.renderDates()}
                 </div>
             </div>
@@ -132,6 +155,7 @@ class Calendar extends React.Component {
 // Subscribe component to redux store and merge the state into component's props
 function mapStateToProps(state) {
     return {
+        events: [],
         messages: state.messages.messages,
         profile: state.profile.profile,
         contacts: state.contacts.contacts

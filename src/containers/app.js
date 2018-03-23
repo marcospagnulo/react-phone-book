@@ -90,7 +90,7 @@ class App extends Component {
                         <PrivateRoute path="/home" authenticated={this.props.profile !== null} component={Home} exact={true} />
                         <PrivateRoute path="/profile" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Profile} />
                         <PrivateRoute path="/messages" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
-                        <PrivateRoute path="/messages/:contactId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
+                        <PrivateRoute path="/messages/:messageId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
                         <PrivateRoute path="/contacts" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />
                         <PrivateRoute path="/contacts/:contactId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />} />
                     </Switch>

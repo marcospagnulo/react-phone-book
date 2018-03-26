@@ -13,6 +13,7 @@ import Login from './login';
 import * as profileActions from '../store/actions/profileActions';
 import * as messagesActions from '../store/actions/messagesActions';
 import * as contactsActions from '../store/actions/contactsActions';
+import * as eventActions from '../store/actions/eventActions';
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
         if (this.props.profile) {
             this.props.getMessagesAction(this.props.profile.id);
             this.props.getContactsAction(this.props.profile.id);
+            this.props.getEventsAction(this.props.profile.id);
         }
     }
 
@@ -85,9 +87,9 @@ class App extends Component {
                 {/* Main content */}
                 <div className="container-fluid">
                     <Switch>
-                        <PrivateRoute path="/" authenticated={this.props.profile !== null} component={Home} exact={true} />
+                        <PrivateRoute path="/" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Home} exact={true} />
                         <Route path="/login" render={(props) => <Login showMessageBox={this.showMessageBox} {...props} />} />
-                        <PrivateRoute path="/home" authenticated={this.props.profile !== null} component={Home} exact={true} />
+                        <PrivateRoute path="/home" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Home} exact={true} />
                         <PrivateRoute path="/profile" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Profile} />
                         <PrivateRoute path="/messages" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
                         <PrivateRoute path="/messages/:messageId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
@@ -124,7 +126,8 @@ function matchDispatchToProps(dispatch) {
     return bindActionCreators({
         logoutAction: profileActions.logoutAction,
         getMessagesAction: messagesActions.getMessagesAction,
-        getContactsAction: contactsActions.getContactsAction
+        getContactsAction: contactsActions.getContactsAction,
+        getEventsAction: eventActions.getEventsAction
     }, dispatch);
 }
 

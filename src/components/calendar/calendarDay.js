@@ -1,5 +1,4 @@
 import React from 'react';
-import * as util from '../../util/util'
 import { history } from '../../store/index';
 
 export default class CalendarDay extends React.Component {
@@ -17,44 +16,59 @@ export default class CalendarDay extends React.Component {
      */
     renderCalendarDateEvents() {
 
+        // check for message received in current date
         let messages = [];
         this.props.messages.forEach((message, index) => {
             messages = [
                 ...messages,
-                <div className="calendar-date-item-event"
+                <div
+                    key={"message" + index}
+                    className="calendar-date-item-event"
                     onClick={() => history.push("/messages/" + message.id)}>
-                    <i key={"message" + index} className="fas fa-comments pr-2"></i>{message.text}
+                    <i className="fas fa-comments pr-2"></i>{message.text}
                 </div>
             ];
         })
-        return (<div>{messages}</div>)
+
+        // check for events scheduled in current date
+        let events = [];
+        this.props.events.forEach((event, index) => {
+            events = [
+                ...events,
+                <div
+                    key={"event" + index}
+                    className="calendar-date-item-event">
+                    <i className="fas fa-calendar pr-2"></i>{event.title}
+                </div>
+            ];
+        })
+
+        return (<div>{messages}{events}</div>)
     }
 
     /**
-     * Render the number of message in a day
+     * Render the number of message received and events scheduled in a day
      * 
      * @param {*} date 
      */
-    renderMessageCounter(date) {
-
-        const day = new Date();
-        day.setFullYear(this.props.year);
-        day.setMonth(this.props.month);
-        day.setDate(date);
-
-        let counter = 0;
-        this.props.messages.forEach((message, index) => {
-            const sentDate = new Date(message.sentDate);
-            if (util.areSameDay(day, sentDate)) {
-                counter++;
-            }
-        })
+    renderEventsCounter() {
         return (
-            counter > 0 ?
-                <div className="calendar-date-item-event">
-                    <i className="fas fa-comments pr-2"></i>{counter}
-                </div>
-                : null
+            <div>
+                {
+                    this.props.messages.length > 0 ?
+                        <div className="calendar-date-item-event">
+                            <i className="fas fa-comments pr-2"></i>{this.props.messages.length}
+                        </div>
+                        : null
+                }
+                {
+                    this.props.events.length > 0 ?
+                        <div className="calendar-date-item-event">
+                            <i className="fas fa-calendar pr-2"></i>{this.props.events.length}
+                        </div>
+                        : null
+                }
+            </div>
         )
     }
 
@@ -69,6 +83,10 @@ export default class CalendarDay extends React.Component {
         this.setState({ showDetail: toggle })
     }
 
+    hasEvent() {
+        return this.props.messages.length > 0 || this.props.events.length > 0;
+    }
+
     render() {
         return (
             <div
@@ -79,17 +97,20 @@ export default class CalendarDay extends React.Component {
                 <div className="calendar-item-day pb-1">{this.props.date}</div>
 
                 {/* Message Counter*/}
-                {this.renderMessageCounter(this.props.date)}
-                {
-                    /* Date events detail */
-                    <div className={"calendar-item-day-detail p-3 " + (this.state.showDetail && this.props.messages.length > 0 ? "show" : "hide")}>
-                        <button type="button" className="close" aria-label="Close" onClick={(evt) => this.toggleDetail(evt, false)}>
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <div className="clearfix"></div>
-                        {this.renderCalendarDateEvents()}
-                    </div>
-                }
+                {this.renderEventsCounter()}
+
+                {/* Date events detail */}
+                <div className={"calendar-item-day-detail p-3 " + (this.state.showDetail && this.hasEvent() > 0 ? "show" : "hide")}>
+                    <button type="button" className="close" aria-label="Close" onClick={(evt) => this.toggleDetail(evt, false)}>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div className="clearfix"></div>
+                    {this.renderCalendarDateEvents()}
+                </div>
+
+                {/* Add event */}
+                <i className="calendar-item-action p-3 fas fa-plus fa-lg" onClick={(evt) => this.props.newEvent(evt, this.props.date)}></i>
+
             </div>
         )
     }

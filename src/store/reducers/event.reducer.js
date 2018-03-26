@@ -15,7 +15,7 @@ export default function (state = INITIAL_STATE, action) {
 
     switch (action.type) {
 
-        case types.REGISTER_EVENTS_COMPONENT:
+        case types.REGISTER_EVENT_COMPONENT:
             return {
                 ...state, component: action.payload
             }

@@ -7,10 +7,10 @@ export const getEvents = (userId) => {
 }
 
 export const subimtEvent = (payload) => {
-    if (payload.event.id) {
-        return axios.put(SERVICE_URL + "/events/" + payload.event.id, payload.event);
+    if (payload.id) {
+        return axios.put(SERVICE_URL + "/events/" + payload.id, payload);
     } else {
-        return axios.post(SERVICE_URL + "/events", payload.event);
+        return axios.post(SERVICE_URL + "/events", payload);
     }
 }
 

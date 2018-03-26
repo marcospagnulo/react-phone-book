@@ -238,15 +238,19 @@ input.form-control:read-only {
   transform: scale(1.5);
 }
 
-.message-send {
+.message-send,
+.event-submit {
   position: absolute;
   width: 100%;
   height: 100%;
   background: rgb(0, 0, 0, 0.5);
   z-index: 2;
+  top: 0;
+  left: 0;
 }
 
-.message-send-form {
+.message-send-form,
+.event-submit-form {
   width: 600px;
   margin: auto;
   height: 400px;
@@ -345,4 +349,17 @@ input.form-control:read-only {
 
 .calendar-item-day-detail.hide {
   transform: scale(0);
+}
+
+.calendar-item-action {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: scale(0);
+  transition: transform ease-in-out .15s;
+  cursor: pointer;
+}
+
+.calendar-dates-item:hover .calendar-item-action {
+  transform: scale(1);
 }

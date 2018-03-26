@@ -1,6 +1,6 @@
 import * as types from '../actionTypes';
 
-export const registerEventComponent = (payload) => ({ type: types.REGISTER_EVENTS_COMPONENT, payload });
+export const registerEventComponent = (payload) => ({ type: types.REGISTER_EVENT_COMPONENT, payload });
 
 export const getEventsAction = (payload) => ({ type: types.GET_EVENTS, payload });
 

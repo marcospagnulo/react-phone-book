@@ -1,15 +1,58 @@
 import React from 'react';
-import * as util from '../util/util'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import CalendarDay from '../components/calendar/calendarDay';
+import EventForm from '../components/calendar/eventForm';
+import * as eventActions from '../store/actions/eventActions';
+import * as util from '../util/util'
+import * as types from '../store/actionTypes';
 
 class Calendar extends React.Component {
 
     constructor(props) {
+
         super(props);
+
+        this.handleContactSelection = this.handleContactSelection.bind(this);
+        this.handleFieldChange = this.handleFieldChange.bind(this);
+        this.handleSubmitEvent = this.handleSubmitEvent.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
         const now = new Date();
-        this.state = { year: now.getFullYear(), month: now.getMonth(), date: now.getDate() }
+        this.state = { year: now.getFullYear(), month: now.getMonth(), date: now.getDate(), showSubmit: false }
+    }
+
+    componentDidMount() {
+        this.props.registerEventComponent(this); // Registering component to the reducer for listening action callbacks
+    }
+
+    /**
+     * Function called by the reducer as a callback of some actions
+     * 
+     * @param {*} actionType 
+     */
+    actionDispatched(actionType) {
+
+        switch (actionType) {
+            case types.SUBMIT_EVENT_SUCCESS:
+                this.props.showMessageBox("Event created succuessfully", "success");
+                break;
+            case types.SUBMIT_EVENT_ERROR:
+                this.props.showMessageBox("Unable to create event due to an error", "danger");
+                break;
+            case types.DELETE_EVENT_SUCCESS:
+                this.props.showMessageBox("Event deleted succuessfully", "success");
+                break;
+            case types.DELETE_EVENT_ERROR:
+                this.props.showMessageBox("Unable to delete event due to an error", "danger");
+                break;
+            case types.GET_EVENTS_ERROR:
+                this.props.showMessageBox("Unable to get events due to an error", "danger");
+                break;
+            default:
+                break;
+        }
     }
 
     handleSelectYear(year) {
@@ -113,7 +156,21 @@ class Calendar extends React.Component {
      * @param {*} date
      */
     getEventsByDay(date) {
-        return [];
+
+        const day = new Date();
+        day.setFullYear(this.state.year);
+        day.setMonth(this.state.month);
+        day.setDate(date);
+
+        let events = [];
+        this.props.events.forEach((event, index) => {
+            const eventDate = new Date(event.date);
+            if (util.areSameDay(day, eventDate)) {
+                events = [...events, event];
+            }
+        })
+
+        return events;
     }
 
     /**
@@ -125,6 +182,7 @@ class Calendar extends React.Component {
             datesHtml = [
                 ...datesHtml,
                 <CalendarDay
+                    newEvent={(evt) => this.newEvent(evt, i)}
                     month={this.state.month}
                     year={this.state.year}
                     date={i}
@@ -136,6 +194,67 @@ class Calendar extends React.Component {
         }
 
         return datesHtml;
+    }
+
+    /**
+     * Reset the field of submit event form
+     */
+    newEvent(evt, date) {
+        evt.stopPropagation();
+        this.setState({ showSubmit: true, eventDate: date });
+    }
+
+    /**
+     * Manage the field value changes updatind the message in the store
+     * 
+     * @param {*} event - event fired by input component
+     */
+    handleFieldChange(event) {
+
+        // Retrieve value and input name
+        const target = event.target;
+        const fieldValue = target.type === 'checkbox' ? target.checked : target.value;
+        const fieldName = target.name;
+
+        // Storing input into component state
+        this.setState({ [fieldName]: fieldValue });
+    }
+
+    /**
+     * Submit the form to the message service
+     */
+    handleSubmitEvent() {
+
+        const eventDate = new Date();
+        eventDate.setDate(this.state.eventDate);
+        eventDate.setMonth(this.state.month);
+        eventDate.setFullYear(this.state.year);
+
+        this.props.submitEventAction({
+            "userId": this.props.profile.id,
+            "contactId": this.state.contact.id,
+            "title": this.state.title,
+            "description": this.state.description,
+            "date": eventDate.getTime()
+        });
+
+        this.handleClose();
+    }
+
+    /**
+     * Store in component state the selected contact
+     * 
+     * @param {*} contact 
+     */
+    handleContactSelection(contact) {
+        this.setState({ contact: contact });
+    }
+
+    /**
+     * Close submit event form modal
+     */
+    handleClose() {
+        this.setState({ conctact: null, title: "", description: "", eventDate: null, showSubmit: false });
     }
 
     render() {
@@ -157,20 +276,41 @@ class Calendar extends React.Component {
                 <div className="calendar-dates d-flex flex-wrap">
                     {this.renderDates()}
                 </div>
+                {
+                    this.state.showSubmit ?
+                        <EventForm
+                            contacts={this.props.contacts}
+                            onFieldChange={this.handleFieldChange}
+                            onSubmitEvent={this.handleSubmitEvent}
+                            onContactSelection={this.handleContactSelection}
+                            onClose={this.handleClose}
+                            contact={this.state.contact} />
+                        : null
+                }
             </div>
         )
     }
 }
 
+function matchDispatchToProps(dispatch) {
+    return bindActionCreators({
+        registerEventComponent: eventActions.registerEventComponent,
+        getMessagesAction: eventActions.getEventsAction,
+        selectEventAction: eventActions.selectEventAction,
+        submitEventAction: eventActions.submitEventAction,
+        deleteEventAction: eventActions.deleteEventAction
+    }, dispatch);
+}
+
 // Subscribe component to redux store and merge the state into component's props
 function mapStateToProps(state) {
     return {
-        events: [],
         messages: state.messages.messages,
         profile: state.profile.profile,
-        contacts: state.contacts.contacts
+        contacts: state.contacts.contacts,
+        events: state.event.events
     };
 };
 
 // connect method from react-router connects the component with redux store
-export default withRouter(connect(mapStateToProps)(Calendar));
+export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Calendar));

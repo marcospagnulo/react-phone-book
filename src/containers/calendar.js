@@ -130,7 +130,7 @@ class Calendar extends React.Component {
                     date={i}
                     events={this.getEventsByDay(i)}
                     messages={this.getMessageByDay(i)}
-                    className={(i === this.props.date ? "active" : "")}
+                    className={(i === this.state.date ? "active" : "")}
                     key={"date" + i} />
             ];
         }

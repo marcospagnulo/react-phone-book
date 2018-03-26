@@ -43,7 +43,6 @@ export default class CalendarDay extends React.Component {
         day.setDate(date);
 
         let counter = 0;
-        let messages = [];
         this.props.messages.forEach((message, index) => {
             const sentDate = new Date(message.sentDate);
             if (util.areSameDay(day, sentDate)) {

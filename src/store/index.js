@@ -18,7 +18,6 @@ const configureStore = () => {
     };
 };
 
-// Create an enhanced history that syncs navigation events with the store
-export const history = createHistory();// syncHistoryWithStore(browserHistory, configureStore());
+export const history = createHistory();
 
 export const store = configureStore();

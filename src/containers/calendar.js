@@ -6,7 +6,7 @@ import CalendarDay from '../components/calendar/calendarDay';
 import EventForm from '../components/calendar/eventForm';
 import * as eventActions from '../store/actions/eventActions';
 import * as util from '../common/util'
-import * as types from '../store/actionTypes';
+import { withReduxComponentRegistration } from '../common/helper';
 
 class Calendar extends React.Component {
 
@@ -21,38 +21,6 @@ class Calendar extends React.Component {
 
         const now = new Date();
         this.state = { year: now.getFullYear(), month: now.getMonth(), date: now.getDate(), showSubmit: false }
-    }
-
-    componentDidMount() {
-        this.props.registerEventComponent(this); // Registering component to the reducer for listening action callbacks
-    }
-
-    /**
-     * Function called by the reducer as a callback of some actions
-     * 
-     * @param {*} actionType 
-     */
-    actionDispatched(actionType) {
-
-        switch (actionType) {
-            case types.SUBMIT_EVENT_SUCCESS:
-                this.props.showMessageBox("Event created succuessfully", "success");
-                break;
-            case types.SUBMIT_EVENT_ERROR:
-                this.props.showMessageBox("Unable to create event due to an error", "danger");
-                break;
-            case types.DELETE_EVENT_SUCCESS:
-                this.props.showMessageBox("Event deleted succuessfully", "success");
-                break;
-            case types.DELETE_EVENT_ERROR:
-                this.props.showMessageBox("Unable to delete event due to an error", "danger");
-                break;
-            case types.GET_EVENTS_ERROR:
-                this.props.showMessageBox("Unable to get events due to an error", "danger");
-                break;
-            default:
-                break;
-        }
     }
 
     handleSelectYear(year) {
@@ -294,7 +262,6 @@ class Calendar extends React.Component {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        registerEventComponent: eventActions.registerEventComponent,
         getMessagesAction: eventActions.getEventsAction,
         selectEventAction: eventActions.selectEventAction,
         submitEventAction: eventActions.submitEventAction,
@@ -312,5 +279,6 @@ function mapStateToProps(state) {
     };
 };
 
-// connect method from react-router connects the component with redux store
-export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Calendar));
+const reduxCompoment = connect(mapStateToProps, matchDispatchToProps)(Calendar);
+const routerComponent = withRouter(reduxCompoment);
+export default withReduxComponentRegistration(routerComponent, eventActions.registerEventComponent);

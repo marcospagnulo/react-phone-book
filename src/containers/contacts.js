@@ -1,11 +1,11 @@
 import React from 'react';
 import ContactInfo from '../components/contact/contactInfo'
 import * as contactActions from '../store/actions/contactsActions';
-import * as types from '../store/actionTypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ContactList from '../components/contact/contactList';
+import { withReduxComponentRegistration } from '../common/helper';
 
 
 class Contacts extends React.Component {
@@ -26,7 +26,6 @@ class Contacts extends React.Component {
     }
 
     componentDidMount() {
-        this.props.registerContactComponent(this); // Registering component to the reducer for listening action callbacks
         let contactId = this.props.match.params.contactId;
         if (contactId) {
             let contact = this.props.contacts.find((contact) => { return contact.id === parseInt(contactId, 10) });
@@ -37,34 +36,6 @@ class Contacts extends React.Component {
     componentWillUnmount() {
         if (this.props.contact && !this.props.contact.id) {
             this.props.resetContactAction();
-        }
-    }
-
-    /**
-     * Function called by the reducer as a callback of some actions
-     * 
-     * @param {*} actionType 
-     */
-    actionDispatched(actionType) {
-
-        switch (actionType) {
-            case types.SUBMIT_CONTACT_SUCCESS:
-                this.props.showMessageBox("Contact submit succuessfully", "success");
-                break;
-            case types.SUBMIT_CONTACT_ERROR:
-                this.props.showMessageBox("Unable to submit contact due to an error", "danger");
-                break;
-            case types.DELETE_CONTACT_SUCCESS:
-                this.props.showMessageBox("Contact deleted succuessfully", "success");
-                break;
-            case types.DELETE_CONTACT_ERROR:
-                this.props.showMessageBox("Unable to delete contact due to an error", "danger");
-                break;
-            case types.GET_CONTACTS_ERROR:
-                this.props.showMessageBox("Unable to get contacts due to an error", "danger");
-                break;
-            default:
-                break;
         }
     }
 
@@ -194,7 +165,6 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        registerContactComponent: contactActions.registerContactComponent,
         getContactsAction: contactActions.getContactsAction,
         selectContactAction: contactActions.selectContactAction,
         updateContactAction: contactActions.updateContactAction,
@@ -204,5 +174,6 @@ function matchDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-// connect method from react-router connects the component with redux store
-export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Contacts));
+const reduxCompoment = connect(mapStateToProps, matchDispatchToProps)(Contacts);
+const routerComponent = withRouter(reduxCompoment);
+export default withReduxComponentRegistration(routerComponent, contactActions.registerContactComponent);

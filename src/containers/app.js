@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import ToolBar from '../components/toolbar';
 import BottomBar from '../components/bottombar';
-import AlertBox from '../components/alertBox';
 import Home from './home';
 import Profile from './profile';
 import Contacts from './contacts';
@@ -19,16 +18,8 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.showMessageBox = this.showMessageBox.bind(this);
         this.logout = this.logout.bind(this);
-        this.state = {
-            messageBox: {
-                show: false,
-                text: "",
-                level: ""
-            },
-            unreadMessage: 0
-        };
+        this.state = { unreadMessage: 0 };
     }
 
     componentDidMount() {
@@ -53,25 +44,6 @@ class App extends Component {
         this.props.logoutAction();
     }
 
-    /**
-     * Show a message box at the top of the page
-     * 
-     * @param {*} text - text to be visualized
-     * @param {*} level - could be success, warning or error
-     */
-    showMessageBox(text, level) {
-
-        // show message box
-        this.setState({ messageBox: { show: true, text: text, level: level } });
-
-        // hide and reset message box after few seconds
-        setTimeout(() => {
-            var messageBox = { ...this.state.messageBox }
-            messageBox.show = false;
-            this.setState({ messageBox })
-        }, 3000);
-    }
-
     render() {
 
         return (
@@ -87,14 +59,39 @@ class App extends Component {
                 {/* Main content */}
                 <div className="container-fluid">
                     <Switch>
-                        <PrivateRoute path="/" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Home} exact={true} />
-                        <Route path="/login" render={(props) => <Login showMessageBox={this.showMessageBox} {...props} />} />
-                        <PrivateRoute path="/home" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Home} exact={true} />
-                        <PrivateRoute path="/profile" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Profile} />
-                        <PrivateRoute path="/messages" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
-                        <PrivateRoute path="/messages/:messageId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Messages} exact={true} />
-                        <PrivateRoute path="/contacts" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />
-                        <PrivateRoute path="/contacts/:contactId" authenticated={this.props.profile !== null} showMessageBox={this.showMessageBox} component={Contacts} />} />
+                        <PrivateRoute
+                            path="/"
+                            authenticated={this.props.profile !== null}
+                            component={Home}
+                            exact={true} />
+                        <Route
+                            path="/login"
+                            render={(props) => <Login showMessageBox={this.showMessageBox} {...props} />} />
+                        <PrivateRoute
+                            path="/home"
+                            authenticated={this.props.profile !== null}
+                            component={Home} exact={true} />
+                        <PrivateRoute
+                            path="/profile"
+                            authenticated={this.props.profile !== null}
+                            component={Profile} />
+                        <PrivateRoute
+                            path="/messages"
+                            authenticated={this.props.profile !== null}
+                            component={Messages} exact={true} />
+                        <PrivateRoute
+                            path="/messages/:messageId"
+                            authenticated={this.props.profile !== null}
+                            component={Messages} exact={true} />
+                        <PrivateRoute
+                            path="/contacts"
+                            authenticated={this.props.profile !== null}
+                            showMessageBox={this.showMessageBox}
+                            component={Contacts} />
+                        <PrivateRoute
+                            path="/contacts/:contactId"
+                            authenticated={this.props.profile !== null}
+                            component={Contacts} />} />
                     </Switch>
                 </div>
 
@@ -104,12 +101,6 @@ class App extends Component {
                     /* Bottom bar */
                     this.props.profile !== null ? <BottomBar unread={this.state.unreadMessage} /> : null
                 }
-
-                { /* Alert box*/}
-                <AlertBox
-                    message={this.state.messageBox.text}
-                    className={"alert alert-" + this.state.messageBox.level}
-                    display={this.state.messageBox.show} />
             </div>
         );
     }

@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MessageList from '../components/message/messageList';
 import MessageSend from '../components/message/messageSend';
+import { withReduxComponentRegistration } from '../common/helper';
 
 class Messages extends React.Component {
 
@@ -28,8 +29,6 @@ class Messages extends React.Component {
     }
 
     componentDidMount() {
-
-        this.props.registerMessagesComponent(this); // Registering component to the reducer for listening action callbacks
 
         // Select message from param url
         const messageId = this.props.match.params.messageId;
@@ -220,7 +219,6 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch) {
     return bindActionCreators({
-        registerMessagesComponent: messageActions.registerMessagesComponent,
         getMessagesAction: messageActions.getMessagesAction,
         selectMessageAction: messageActions.selectMessageAction,
         sendMessageAction: messageActions.sendMessageAction,
@@ -229,5 +227,6 @@ function matchDispatchToProps(dispatch) {
     }, dispatch);
 }
 
-// connect method from react-router connects the component with redux store
-export default withRouter(connect(mapStateToProps, matchDispatchToProps)(Messages));
+const reduxCompoment = connect(mapStateToProps, matchDispatchToProps)(Messages);
+const routerComponent = withRouter(reduxCompoment);
+export default withReduxComponentRegistration(routerComponent, messageActions.registerMessagesComponent);

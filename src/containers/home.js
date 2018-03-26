@@ -1,12 +1,15 @@
 import React from 'react';
 import Calendar from './calendar';
 
-const Home = () => (
-    <div className="row">
-        <div className="w-100 p-3">
-            <Calendar />
-        </div>
-    </div>
-);
 
-export default Home;
+export default class Home extends React.Component {
+    render() {
+        return (
+            <div className="row">
+                <div className="w-100 p-3">
+                    <Calendar showMessageBox={this.props.showMessageBox} />
+                </div>
+            </div>
+        )
+    }
+}

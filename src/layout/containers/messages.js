@@ -46,34 +46,6 @@ class Messages extends React.Component {
     }
 
     /**
-     * Function called by the reducer as a callback of some actions
-     * 
-     * @param {*} actionType 
-     */
-    actionDispatched(actionType) {
-
-        switch (actionType) {
-            case types.SEND_MESSAGE_SUCCESS:
-                this.props.showMessageBox("Message send succuessfully", "success");
-                break;
-            case types.SEND_MESSAGE_ERROR:
-                this.props.showMessageBox("Unable to send message due to an error", "danger");
-                break;
-            case types.DELETE_MESSAGE_SUCCESS:
-                this.props.showMessageBox("Message deleted succuessfully", "success");
-                break;
-            case types.DELETE_MESSAGE_ERROR:
-                this.props.showMessageBox("Unable to delete message due to an error", "danger");
-                break;
-            case types.GET_MESSAGES_ERROR:
-                this.props.showMessageBox("Unable to get messages due to an error", "danger");
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
      * Manage the click on reply message button
      * 
      * @param {*} evt 

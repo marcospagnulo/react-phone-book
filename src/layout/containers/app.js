@@ -9,10 +9,10 @@ import Profile from './profile';
 import Contacts from './contacts';
 import Messages from './messages';
 import Login from './login';
-import * as profileActions from '../store/actions/profileActions';
-import * as messagesActions from '../store/actions/messagesActions';
-import * as contactsActions from '../store/actions/contactsActions';
-import * as eventActions from '../store/actions/eventActions';
+import * as profileActions from '../../store/actions/profileActions';
+import * as messagesActions from '../../store/actions/messagesActions';
+import * as contactsActions from '../../store/actions/contactsActions';
+import * as eventActions from '../../store/actions/eventActions';
 
 class App extends Component {
 

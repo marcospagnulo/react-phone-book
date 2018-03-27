@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import CalendarDay from '../components/calendar/calendarDay';
 import EventForm from '../components/calendar/eventForm';
-import * as eventActions from '../store/actions/eventActions';
-import * as util from '../common/util'
-import { withReduxComponentRegistration } from '../common/helper';
+import * as eventActions from '../../store/actions/eventActions';
+import * as util from '../../common/util'
+import { withReduxComponentRegistration } from '../../common/helper';
 
 class Calendar extends React.Component {
 

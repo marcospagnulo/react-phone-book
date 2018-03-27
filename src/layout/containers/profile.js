@@ -2,8 +2,8 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormField from '../components/formField';
-import * as profileActions from '../store/actions/profileActions'
-import * as types from '../store/actionTypes';
+import * as profileActions from '../../store/actions/profileActions'
+import * as types from '../../store/actionTypes';
 
 class Profile extends React.Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { history } from '../../store/index';
+import { history } from '../../../store/index';
 
 export default class CalendarDay extends React.Component {
 

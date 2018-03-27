@@ -1,12 +1,12 @@
 import React from 'react';
-import * as messageActions from '../store/actions/messagesActions';
-import * as types from '../store/actionTypes';
+import * as messageActions from '../../store/actions/messagesActions';
+import * as types from '../../store/actionTypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import MessageList from '../components/message/messageList';
 import MessageSend from '../components/message/messageSend';
-import { withReduxComponentRegistration } from '../common/helper';
+import { withReduxComponentRegistration } from '../../common/helper';
 
 class Messages extends React.Component {
 

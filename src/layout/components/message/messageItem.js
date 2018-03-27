@@ -1,5 +1,5 @@
 import React from 'react';
-import * as util from '../../common/util'
+import * as util from '../../../common/util'
 
 export default class MessageItem extends React.Component {
 

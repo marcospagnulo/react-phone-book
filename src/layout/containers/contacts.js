@@ -1,11 +1,11 @@
 import React from 'react';
 import ContactInfo from '../components/contact/contactInfo'
-import * as contactActions from '../store/actions/contactsActions';
+import * as contactActions from '../../store/actions/contactsActions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ContactList from '../components/contact/contactList';
-import { withReduxComponentRegistration } from '../common/helper';
+import { withReduxComponentRegistration } from '../../common/helper';
 
 
 class Contacts extends React.Component {

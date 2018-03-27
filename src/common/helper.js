@@ -1,7 +1,7 @@
 import React from 'react';
 import * as types from '../store/actionTypes';
 import { store } from '../store/';
-import AlertBox from '../components/alertBox';
+import AlertBox from '../layout/components/alertBox';
 
 /**
  * 

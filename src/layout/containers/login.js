@@ -2,9 +2,9 @@ import React from 'react';
 import FormField from '../components/formField';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as profileActions from '../store/actions/profileActions';
-import { history } from '../store';
-import * as types from '../store/actionTypes';
+import * as profileActions from '../../store/actions/profileActions';
+import { history } from '../../store';
+import * as types from '../../store/actionTypes';
 
 class Login extends React.Component {
 

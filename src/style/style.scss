@@ -2,6 +2,7 @@ $primary-color: #263238;
 $primary-light-color: #4f5b62;
 $primary-dark-color: #000a12;
 $accent-color: #03A9F4;
+$accent-color-light: rgb(44, 188, 255);
 $shadow:rgba(0, 0, 0, 0.76);
 html {
   width: 100%;
@@ -68,6 +69,34 @@ input.form-control:read-only {
   background-color: $accent-color;
 }
 
+.floating-action {
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  z-index: 1;
+  border-radius: 50%;
+  background-color: $accent-color;
+  color: white;
+  border: none;
+  box-shadow: 0 0px 10px 0 $shadow;
+}
+
+.floating-action.bottom {
+  bottom: 80px;
+}
+
+.floating-action.right {
+  right: 32px;
+}
+
+.floating-action:hover {
+  background-color: $accent-color-light;
+}
+
+.floating-action:focus {
+  outline: none;
+}
+
 /* Alert Box */
 
 #alertbox {
@@ -114,6 +143,7 @@ input.form-control:read-only {
   height: 48px;
   z-index: 3;
   background-color: $primary-color;
+  box-shadow: 0 0px 10px 0 $shadow;
 }
 
 .toolbar-empty-space {

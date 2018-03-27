@@ -13,7 +13,7 @@ export default class MessageSend extends React.Component {
                     <div className="card">
 
                         <div className="card-header">
-                            <span>Send message</span>
+                            <span className="h4">Send message</span>
                             <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
                                 <span aria-hidden="true">&times;</span>
                             </button>

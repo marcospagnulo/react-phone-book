@@ -13,7 +13,7 @@ export default class EventForm extends React.Component {
                     <div className="card">
 
                         <div className="card-header">
-                            <span>Create event</span>
+                            <span className="h4">Create event</span>
                             <button type="button" className="close" aria-label="Close" onClick={this.props.onClose}>
                                 <span aria-hidden="true">&times;</span>
                             </button>

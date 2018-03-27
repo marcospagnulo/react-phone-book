@@ -121,11 +121,7 @@ class Contacts extends React.Component {
                     {/* Contact list */}
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="float-left">Contact list</h4>
-                            {/* New Contact */}
-                            <button onClick={() => this.newContact()} className="btn btn-primary float-right">
-                                <i className="fas fa-plus p-1"></i><span>New contact</span>
-                            </button>
+                            <h4>Contact list</h4>
                         </div>
                         <div className="list-group list-group-flush">
                             <ContactList
@@ -149,6 +145,11 @@ class Contacts extends React.Component {
                             handleSubmitContact={this.handleSubmitContact} />
                     }
                 </div>
+
+                {/* New Contact */}
+                <button onClick={() => this.newContact()} className="floating-action bottom right">
+                    <i className="fas fa-plus p-1"></i>
+                </button>
             </div>
         );
     }

@@ -147,11 +147,7 @@ class Messages extends React.Component {
                     {/* message list */}
                     <div className="card">
                         <div className="card-header">
-                            <h4 className="float-left">Messages</h4>
-                            {/* New Message */}
-                            <button onClick={() => this.newMessage()} className="btn btn-primary float-right">
-                                <i className="fas fa-plus p-1"></i><span>New message</span>
-                            </button>
+                            <h4>Messages</h4>
                         </div>
                         <MessageList
                             message={this.props.message}
@@ -172,6 +168,11 @@ class Messages extends React.Component {
                             to={this.state.to} />
                         : null
                 }
+
+                {/* New Message */}
+                <button onClick={() => this.newMessage()} className="floating-action bottom right">
+                    <i className="fas fa-plus p-1"></i>
+                </button>
             </div>
         );
     }

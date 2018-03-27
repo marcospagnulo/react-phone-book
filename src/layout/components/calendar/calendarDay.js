@@ -109,7 +109,7 @@ export default class CalendarDay extends React.Component {
                 </div>
 
                 {/* Add event */}
-                <i className="calendar-item-action p-3 fas fa-plus fa-lg" onClick={(evt) => this.props.newEvent(evt, this.props.date)}></i>
+                <i className="calendar-item-action p-3 fas fa-plus fa-lg action" onClick={(evt) => this.props.newEvent(evt, this.props.date)}></i>
 
             </div>
         )

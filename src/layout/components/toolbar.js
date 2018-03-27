@@ -5,7 +5,7 @@ export default class ToolBar extends React.Component {
 
     render() {
         return (
-            <div id="toolbar" className="bg-dark p-2">
+            <div id="toolbar" className="p-2">
 
                 {/* Welcome */}
                 <div className="welcome">

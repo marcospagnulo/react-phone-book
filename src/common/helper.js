@@ -105,6 +105,13 @@ export function withReduxComponentRegistration(WrappedComponent, registerCompone
                 case types.GET_EVENTS_ERROR:
                     this.showMessageBox("Unable to get events due to an error", "danger");
                     break;
+
+                case types.SUBMIT_PROFILE_SUCCESS:
+                    this.showMessageBox("Profile submit succuessfully", "success");
+                    return;
+                case types.SUBMIT_PROFILE_ERROR:
+                    this.showMessageBox("Unable to submit profile due to an error", "danger");
+                    return;
                 default:
                     break;
             }

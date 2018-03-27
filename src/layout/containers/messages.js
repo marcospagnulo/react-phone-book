@@ -1,6 +1,5 @@
 import React from 'react';
 import * as messageActions from '../../store/actions/messagesActions';
-import * as types from '../../store/actionTypes';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';

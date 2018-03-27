@@ -1,5 +1,5 @@
 import React from 'react';
-import Calendar from './calendar';
+import Calendar from '../containers/calendar';
 
 
 export default class Home extends React.Component {

@@ -4,7 +4,7 @@ import { store } from '../store/';
 import AlertBox from '../layout/components/alertBox';
 
 /**
- * 
+ * Decorator for registering a component into redux store. This decorator also manage all the callback actions and notifify the UI with a popup
  * 
  * @param {*} WrappedComponent 
  * @param {*} registerComponent 
@@ -12,7 +12,6 @@ import AlertBox from '../layout/components/alertBox';
 export function withReduxComponentRegistration(WrappedComponent, registerComponent) {
 
     return class extends React.Component {
-
 
         constructor(props) {
             super(props);

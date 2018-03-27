@@ -14,7 +14,6 @@ class Messages extends React.Component {
         super(props);
 
         // Bind functions
-        this.actionDispatched = this.actionDispatched.bind(this);
         this.handleMessageSelection = this.handleMessageSelection.bind(this);
         this.handleFieldChange = this.handleFieldChange.bind(this);
         this.handleSendMessage = this.handleSendMessage.bind(this);

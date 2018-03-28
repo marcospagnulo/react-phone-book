@@ -90,7 +90,10 @@ class Profile extends React.Component {
                                 fieldName="password"
                                 fieldLabel="Password"
                                 fieldValue={this.props.profile.password} />
-                            <button className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+
+                            <button className="floating-action bottom right" onClick={this.handleSubmit}>
+                                <i className="fas fa-check fa-lg p-1"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

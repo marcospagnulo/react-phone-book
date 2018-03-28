@@ -3,14 +3,13 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 48px;
     z-index: 3;
     background-color: $primary-color;
     box-shadow: 0 0px 10px 0 $shadow;
 }
 
 .toolbar-empty-space {
-    padding: 24px;
+    padding: 32px;
 }
 
 .welcome {

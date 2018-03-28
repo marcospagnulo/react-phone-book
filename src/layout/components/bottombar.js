@@ -11,14 +11,14 @@ export default class BottomBar extends React.Component {
                     {/* Home */}
                     <div className="bottom-bar-item col-sm p-0">
                         <NavLink to="/home" replace={true} activeClassName="active" className="p-2">
-                            <i className="fas fa-calendar-alt fa-2x align-middle pr-2"></i>
+                            <i className="fas fa-calendar-alt fa-lg align-middle pr-2"></i>
                             <span className="align-middle pr-3">Calendar</span>
                         </NavLink>
                     </div>
                     {/* Messages */}
                     <div className="bottom-bar-item col-sm p-0">
                         <NavLink to="/messages" replace={true} activeClassName="active" className="p-2">
-                            <i className="fas fa-comments fa-2x align-middle pr-2">
+                            <i className="fas fa-comments fa-lg align-middle pr-2">
                             </i>
                             <span className="align-middle pr-3">Messages</span>
                             {
@@ -33,7 +33,7 @@ export default class BottomBar extends React.Component {
                     {/* Contacts */}
                     <div className="bottom-bar-item col-sm p-0">
                         <NavLink to="/contacts" replace={true} activeClassName="active" className="p-2">
-                            <i className="fas fa-users fa-2x align-middle pr-2"></i>
+                            <i className="fas fa-users fa-lg align-middle pr-2"></i>
                             <span className="align-middle pr-3">Contacts</span>
                         </NavLink>
                     </div>

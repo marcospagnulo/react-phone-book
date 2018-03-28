@@ -1,0 +1,43 @@
+/* Card */
+
+.card {
+    box-shadow: 1px 1px 2px 0px $shadow;
+    border: none;
+}
+
+.card-header {
+    background-color: $primary-light-color;
+    color: white;
+    border: none;
+}
+
+/* Floating action */
+
+.floating-action {
+    position: fixed;
+    width: 64px;
+    height: 64px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: $accent-color;
+    color: white;
+    border: none;
+    box-shadow: 0 0px 10px 0 $shadow;
+    transition: all ease-in-out .20s;
+}
+
+.floating-action.bottom {
+    bottom: 80px;
+}
+
+.floating-action.right {
+    right: 32px;
+}
+
+.floating-action:hover {
+    background-color: $accent-color-dark;
+}
+
+.floating-action:focus {
+    outline: none;
+}

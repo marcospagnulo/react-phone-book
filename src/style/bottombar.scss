@@ -15,7 +15,7 @@
     text-align: center;
     color: white;
     background: $primary-color;
-    transition: all ease-in-out .15s;
+    transition: all ease-in-out $transition-duration;
 }
 
 #bottom-bar a.active {

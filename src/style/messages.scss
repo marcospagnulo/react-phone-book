@@ -3,7 +3,7 @@
 }
 
 .message-item-text {
-    transition: height ease-in-out .15s;
+    transition: height ease-in-out $transition-duration;
     overflow: hidden;
 }
 
@@ -35,7 +35,7 @@
 
 .message-item .message-item-actions i {
     transform: scale(0);
-    transition: transform ease-in-out .15s;
+    transition: transform ease-in-out $transition-duration;
     margin-left: 32px;
 }
 

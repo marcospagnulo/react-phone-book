@@ -17,8 +17,8 @@ export default class FormField extends React.Component {
                             className="form-control"
                             readOnly={!this.props.edit}
                             autoComplete="off"
-                            onBlur={(evt) => this.props.onBlur(evt)}
-                            onFocus={(evt) => this.props.onFocus(evt)}
+                            onBlur={(evt) => this.props.onBlur ? this.props.onBlur(evt) : null}
+                            onFocus={(evt) => this.props.onFocus ? this.props.onFocus(evt) : null}
                             onChange={(evt) => this.props.onFieldChange(evt)}
                             value={this.props.fieldValue} />
                 }

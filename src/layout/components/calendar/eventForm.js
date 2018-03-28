@@ -36,7 +36,7 @@ export default class EventForm extends React.Component {
 
                                 <div className="suggestions-wrapper">
                                     <FormField
-                                        edit={false}
+                                        edit={true}
                                         iconClass="far fa-address-book p-1"
                                         onFieldChange={(evt) => this.props.onFieldChange(evt)}
                                         fieldName="to"
@@ -44,12 +44,17 @@ export default class EventForm extends React.Component {
                                         onBlur={(evt) => this.toggleContactList(false)}
                                         onFocus={(evt) => this.toggleContactList(true)}
                                         fieldLabel="To" />
-                                    <ContactList
-                                        className="suggestions-list"
-                                        itemClassName="list-group-item list-group-item-action"
-                                        contact={this.props.contact}
-                                        contacts={this.props.contacts}
-                                        onContactSelection={this.props.onContactSelection} />
+
+                                    {
+                                        this.state.showContactList ?
+                                            <ContactList
+                                                className="suggestions-list"
+                                                itemClassName="list-group-item list-group-item-action"
+                                                contact={this.props.contact}
+                                                contacts={this.props.contacts}
+                                                onContactSelection={this.props.onContactSelection} />
+                                            : null
+                                    }
                                 </div>
 
                                 <FormField

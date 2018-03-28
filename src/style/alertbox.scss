@@ -1,0 +1,22 @@
+#alertbox {
+    position: fixed;
+    top: 0px;
+    left: 50%;
+    z-index: 1;
+    transition: all ease-in-out .15s;
+}
+
+#alertbox.up {
+    transform: translateY(-50%);
+    opacity: 0;
+}
+
+#alertbox.down {
+    transform: translateY(100%);
+    opacity: 1;
+}
+
+.alert-box-inner {
+    left: -50%;
+    position: relative;
+}

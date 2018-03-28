@@ -4,7 +4,7 @@ import { store, history } from './store';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router-dom';
 import App from './layout/containers/app';
-import './style/style.scss'
+import './style/main.scss'
 
 // We require the routes and render to the DOM using ReactDOM API
 ReactDOM.render(

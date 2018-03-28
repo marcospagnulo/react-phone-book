@@ -1,0 +1,109 @@
+@font-face {
+    font-family: 'Noto';
+    src: url('NotoMono-Regular.ttf');
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Noto;
+    background: white;
+    width: 100%;
+    height: 100%;
+    color: rgba(0, 0, 0, 0.76);
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+i.action {
+    color: $accent-color;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+textarea {
+    width: 100%;
+}
+
+input.form-control {
+    border: none;
+    border-bottom: 2px solid $primary-light-color;
+    border-radius: 0;
+    padding: .375rem 0;
+}
+
+input.form-control:focus {
+    box-shadow: none;
+    border-bottom: 2px solid $accent-color;
+    transition: border-bottom ease-in-out .5s;
+}
+
+input.form-control:read-only {
+    background: none;
+    border: none;
+    margin-bottom: 1px;
+}
+
+.list-group-item.active {
+    background-color: $accent-color;
+}
+
+.floating-action {
+    position: fixed;
+    width: 64px;
+    height: 64px;
+    z-index: 1;
+    border-radius: 50%;
+    background-color: $accent-color;
+    color: white;
+    border: none;
+    box-shadow: 0 0px 10px 0 $shadow;
+    transition: all ease-in-out .20s;
+}
+
+.floating-action.bottom {
+    bottom: 80px;
+}
+
+.floating-action.right {
+    right: 32px;
+}
+
+.floating-action:hover {
+    background-color: $accent-color-dark;
+}
+
+.floating-action:focus {
+    outline: none;
+}
+
+#login {
+    width: 300px;
+    margin: auto;
+    height: 400px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

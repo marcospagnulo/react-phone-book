@@ -1,0 +1,81 @@
+.message-item {
+    position: relative;
+}
+
+.message-item-text {
+    transition: height ease-in-out .15s;
+    overflow: hidden;
+}
+
+.message-item-text-inner {
+    border-top: 1px solid white;
+    padding-top: 10px;
+    margin-top: 10px;
+}
+
+.message-item-text.hide {
+    display: none;
+}
+
+.message-item-text.show {
+    display: block;
+}
+
+.message-item-icon,
+.message-item-from-at {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.message-item-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.message-item .message-item-actions i {
+    transform: scale(0);
+    transition: transform ease-in-out .15s;
+    margin-left: 32px;
+}
+
+.message-item:hover .message-item-actions i {
+    transform: scale(1);
+}
+
+.message-item .message-item-actions i:hover {
+    transform: scale(1.5);
+}
+
+.message-send,
+.event-submit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2;
+    top: 0;
+    left: 0;
+}
+
+.message-send-form,
+.event-submit-form {
+    width: 600px;
+    margin: auto;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.message-send-to-container {
+    position: relative;
+}
+
+.message-send-contact-list {
+    position: absolute;
+    max-height: 200px;
+    overflow-y: scroll;
+}

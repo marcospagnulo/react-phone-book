@@ -4,9 +4,20 @@ import ContactList from '../contact/contactList';
 
 export default class EventForm extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { "showContactList": false }
+    }
+
+    toggleContactList(toggle) {
+        setTimeout(() => {
+            this.setState({ showContactList: toggle })
+        }, 250);
+    }
+
     render() {
         return (
-            <div className="event-submit">
+            <div className="popup d-flex justify-content-around align-items-center">
 
                 <div className="event-submit-form">
 
@@ -23,36 +34,38 @@ export default class EventForm extends React.Component {
 
                             <form onSubmit={(evt) => { evt.preventDefault() }}>
 
-                                <div className="float-left">
+                                <div className="suggestions-wrapper">
                                     <FormField
                                         edit={false}
                                         iconClass="far fa-address-book p-1"
                                         onFieldChange={(evt) => this.props.onFieldChange(evt)}
                                         fieldName="to"
                                         fieldValue={this.props.contact ? this.props.contact.surname + " " + this.props.contact.name : ""}
+                                        onBlur={(evt) => this.toggleContactList(false)}
+                                        onFocus={(evt) => this.toggleContactList(true)}
                                         fieldLabel="To" />
-                                    <FormField
-                                        edit={true}
-                                        iconClass="fas fa-font p-1"
-                                        onFieldChange={(evt) => this.props.onFieldChange(evt)}
-                                        fieldType="text"
-                                        fieldName="title"
-                                        fieldLabel="Title" />
-                                    <FormField
-                                        edit={true}
-                                        iconClass="far fa-edit p-1"
-                                        onFieldChange={(evt) => this.props.onFieldChange(evt)}
-                                        fieldType="textarea"
-                                        fieldName="description"
-                                        fieldLabel="Description" />
+                                    <ContactList
+                                        className="suggestions-list"
+                                        itemClassName="list-group-item list-group-item-action"
+                                        contact={this.props.contact}
+                                        contacts={this.props.contacts}
+                                        onContactSelection={this.props.onContactSelection} />
                                 </div>
 
-                                <ContactList
-                                    className="float-right"
-                                    itemClassName="list-group-item list-group-item-action"
-                                    contact={this.props.contact}
-                                    contacts={this.props.contacts}
-                                    onContactSelection={this.props.onContactSelection} />
+                                <FormField
+                                    edit={true}
+                                    iconClass="fas fa-font p-1"
+                                    onFieldChange={(evt) => this.props.onFieldChange(evt)}
+                                    fieldType="text"
+                                    fieldName="title"
+                                    fieldLabel="Title" />
+                                <FormField
+                                    edit={true}
+                                    iconClass="far fa-edit p-1"
+                                    onFieldChange={(evt) => this.props.onFieldChange(evt)}
+                                    fieldType="textarea"
+                                    fieldName="description"
+                                    fieldLabel="Description" />
 
                                 <div className="clearfix"></div>
 

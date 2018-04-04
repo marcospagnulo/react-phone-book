@@ -1,3 +1,8 @@
+.calendar-container {
+    margin: 0 auto;
+    width: 1120px;
+}
+
 .calendar-years-item,
 .calendar-months-item {
     vertical-align: bottom;
@@ -21,14 +26,7 @@
 .calendar-week-item,
 .calendar-dates-item {
     width: 160px;
-}
-
-.calendar-week,
-.calendar-dates {
-    margin: 0 auto;
-    width: 1120px;
-    background: white;
-    box-shadow: 1px 1px 2px 0px $shadow;
+    background-color: white
 }
 
 .calendar-week-item {

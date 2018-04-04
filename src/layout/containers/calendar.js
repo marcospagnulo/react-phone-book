@@ -227,7 +227,7 @@ class Calendar extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="calendar-container">
                 {/* Years */}
                 <div className="calendar-years d-flex justify-content-center">
                     {this.renderYears()}
